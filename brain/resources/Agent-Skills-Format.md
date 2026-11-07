@@ -55,14 +55,14 @@ skill-name/
 
 ### Frontmatter fields
 
-| Field | Required | Constraints |
-|---|---|---|
-| `name` | **Yes** | Max 64 characters. Lowercase letters, numbers and hyphens only. Must not start or end with a hyphen. |
-| `description` | **Yes** | Max 1024 characters. Non-empty. Describes what the skill does and when to use it. |
-| `license` | No | License name or reference to a bundled license file. |
-| `compatibility` | No | Max 500 characters. Environment requirements (intended product, system packages, network access, etc.). |
-| `metadata` | No | Arbitrary map from string keys to string values. |
-| `allowed-tools` | No | Space-separated string of pre-approved tools the skill may use. **Experimental.** |
+| Field           | Required | Constraints                                                                                             |
+| --------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `name`          | **Yes**  | Max 64 characters. Lowercase letters, numbers and hyphens only. Must not start or end with a hyphen.    |
+| `description`   | **Yes**  | Max 1024 characters. Non-empty. Describes what the skill does and when to use it.                       |
+| `license`       | No       | License name or reference to a bundled license file.                                                    |
+| `compatibility` | No       | Max 500 characters. Environment requirements (intended product, system packages, network access, etc.). |
+| `metadata`      | No       | Arbitrary map from string keys to string values.                                                        |
+| `allowed-tools` | No       | Space-separated string of pre-approved tools the skill may use. **Experimental.**                       |
 
 Minimal example:
 
@@ -140,11 +140,11 @@ description: A description of what this skill does and when to use it.
 
 ### Progressive disclosure
 
-| Stage | What is loaded | When | Size guidance |
-|---|---|---|---|
-| 1. Metadata | `name` and `description` | At startup, for all skills | ~100 tokens |
-| 2. Instructions | Full `SKILL.md` body | When the skill is activated | < 5000 tokens recommended |
-| 3. Resources | Files in `scripts/`, `references/`, `assets/` | Only when required | As needed |
+| Stage           | What is loaded                                | When                        | Size guidance             |
+| --------------- | --------------------------------------------- | --------------------------- | ------------------------- |
+| 1. Metadata     | `name` and `description`                      | At startup, for all skills  | ~100 tokens               |
+| 2. Instructions | Full `SKILL.md` body                          | When the skill is activated | < 5000 tokens recommended |
+| 3. Resources    | Files in `scripts/`, `references/`, `assets/` | Only when required          | As needed                 |
 
 - Keep the main `SKILL.md` **under 500 lines**.
 - Move detailed reference material to separate files.
@@ -168,7 +168,7 @@ description: A description of what this skill does and when to use it.
   - `description` is non-empty and well under 1024 characters, and states what the skill does.
   - The file is 286 lines, under the 500-line recommendation.
   - It has not been run through `skills-ref validate`; doing so would confirm conformance.
-- **Description quality matters most for discovery.** Only `name` and `description` are loaded at startup, so the description is what lets an agent pick the skill. Our `brain-ingest` description says *what* it does but has no explicit "Use when…" clause, which the spec recommends. Adding one is a possible improvement.
+- **Description quality matters most for discovery.** Only `name` and `description` are loaded at startup, so the description is what lets an agent pick the skill. Our `brain-ingest` description says _what_ it does but has no explicit "Use when…" clause, which the spec recommends. Adding one is a possible improvement.
 - **Keep instructions lean.** If `brain-ingest` grows (e.g. the research-note template or log format), moving that material into `references/` or `assets/` would follow the progressive-disclosure guidance.
 - **Future project skills:** any additional skills (e.g. for working with the YouTube MCP server) should use the same structure, valid names that match their directory, and clear trigger-oriented descriptions.
 - **Relationship to MCP:** Agent Skills (instructions loaded by an agent) and MCP Tools (functions exposed by a server) are separate mechanisms. The specification does not describe how they interact; any combination in our project would be a design decision. See [[MCP-Tools-and-Resources|MCP Tools and Resources]].
@@ -190,4 +190,4 @@ None assigned yet.
 
 - [[MCP-Tools-and-Resources|MCP Tools and Resources]]
 - [[MCP-Architecture|MCP Architecture]]
-- [[YouTube MCP Server]] *(planned — not yet created)*
+- [[YouTube MCP Server]] _(planned — not yet created)_

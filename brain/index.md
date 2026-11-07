@@ -17,11 +17,11 @@ for our YouTube Video Intelligence MCP Server.
 
 ### Resources
 - [[YouTube-Data-API|YouTube Data API]]
-- [[OAuth Authentication]] *(planned — not yet created)*
+- [[OAuth-Authentication|OAuth 2.0 Authentication]]
 - [[MCP-Architecture|MCP Architecture]]
 - [[MCP-Tools-and-Resources|MCP Tools and Resources]]
-- [[YouTube API Quota Management]] *(planned — not yet created)*
-- [[Video Similarity Algorithms]] *(planned — not yet created)*
+- [[YouTube-API-Quota-Management|YouTube API Quota Management]]
+- [[TF-IDF-and-Cosine-Similarity|TF-IDF and Cosine Similarity]]
 - [[Agent-Skills-Format|Agent Skills Format]]
 
 ### Inbox
