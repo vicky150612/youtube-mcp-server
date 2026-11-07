@@ -1,0 +1,33 @@
+name: Task or feature request
+description: Propose a focused task linked to project requirements.
+title: "[Task]: "
+body:
+  - type: markdown
+    attributes:
+      value: Do not include API keys, OAuth tokens, or private user data.
+  - type: input
+    id: requirement
+    attributes:
+      label: Related requirement
+      description: Use an existing requirement ID when applicable.
+      placeholder: FR-01
+    validations:
+      required: false
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or need
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Expected outcome and acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints, dependencies, or open decisions
+    validations:
+      required: false
