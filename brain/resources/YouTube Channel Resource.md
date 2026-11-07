@@ -1,4 +1,7 @@
 ---
+sources:
+  - "https://developers.google.com/youtube/data/reference/rest/v3/channels/list"
+  - "https://developers.google.com/youtube/data/getting-started"
 title: YouTube Channel Resource
 tags:
   - youtube

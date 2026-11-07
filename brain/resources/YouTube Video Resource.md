@@ -1,4 +1,8 @@
 ---
+sources:
+  - "https://developers.google.com/youtube/data/reference/rest/v3/videos"
+  - "https://developers.google.com/youtube/data/guides/implementation/ratings"
+  - "https://developers.google.com/youtube/data/getting-started"
 title: YouTube Video Resource
 tags:
   - youtube

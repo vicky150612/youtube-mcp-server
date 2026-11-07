@@ -1,4 +1,9 @@
 ---
+sources:
+  - "https://developers.google.com/youtube/data/reference/rest/v3/playlists/insert"
+  - "https://developers.google.com/youtube/data/reference/rest/v3/playlistItems"
+  - "https://developers.google.com/youtube/data/determine_quota_cost"
+  - "https://developers.google.com/youtube/data/guides/implementation/ratings"
 title: YouTube Playlist Resource
 tags:
   - youtube

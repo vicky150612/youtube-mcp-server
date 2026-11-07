@@ -1,4 +1,11 @@
 ---
+sources:
+  - "docs/srs.md"
+  - "docs/development-plan.md"
+  - "brain/resources/YouTube Channel Resource.md"
+  - "brain/resources/YouTube Data API Overview.md"
+  - "brain/resources/YouTube Playlist Resource.md"
+  - "brain/resources/YouTube Video Resource.md"
 title: AI session — SRS drafting and API research
 tags:
   - ai-session

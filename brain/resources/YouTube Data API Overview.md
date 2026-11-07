@@ -1,4 +1,7 @@
 ---
+sources:
+  - "https://developers.google.com/youtube/data/getting-started"
+  - "https://developers.google.com/youtube/data/determine_quota_cost"
 title: YouTube Data API Overview
 tags:
   - youtube
