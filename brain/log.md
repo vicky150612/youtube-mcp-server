@@ -134,6 +134,54 @@ https://agentskills.io/specification
 - Related note [[YouTube MCP Server]] is planned but not yet created.
 - The specification page states no version or publication date.
 - `.claude/skills/brain-ingest/SKILL.md` was checked manually against the spec but not with `skills-ref validate`.
+
+### Activity 5: Research Ingestion — OAuth 2.0 Authentication
+
+**Topic:** OAuth 2.0 user authorization and token lifecycle for Google APIs
+
+**Sources:** Google Identity OAuth 2.0 overview and Google server-side web application guide (accessed 2026-11-07).
+
+**Note Created:** [[OAuth-Authentication|OAuth 2.0 Authentication]]
+
+**Destination:** brain/resources/OAuth-Authentication.md
+
+**Contributor:** Person 3
+
+**Index:** Replaced the planned OAuth resource link with the created note.
+
+**Result:** Created a research note covering authorization-code flow, scopes, access/refresh tokens, secure storage, and the project's re-authorisation requirement. The exact OAuth client type, scopes and storage design remain open.
+
+### Activity 6: Research Ingestion — YouTube API Quota Management
+
+**Topic:** YouTube Data API quota costs, limits, caching and pre-checks
+
+**Sources:** YouTube Data API quota-cost and errors documentation (accessed 2026-11-07).
+
+**Note Created:** [[YouTube-API-Quota-Management|YouTube API Quota Management]]
+
+**Destination:** brain/resources/YouTube-API-Quota-Management.md
+
+**Contributor:** Person 3
+
+**Index:** Replaced the planned quota resource link with the created note.
+
+**Result:** Created a research note distinguishing the general daily unit pool from method-specific buckets, documenting common costs and `quotaExceeded`, and separating documented facts from project recommendations.
+
+### Activity 7: Research Ingestion — TF-IDF and Cosine Similarity
+
+**Topic:** Text vectorization, TF-IDF weighting and cosine similarity
+
+**Sources:** scikit-learn feature-extraction and cosine-similarity documentation (accessed 2026-11-07).
+
+**Note Created:** [[TF-IDF-and-Cosine-Similarity|TF-IDF and Cosine Similarity]]
+
+**Destination:** brain/resources/TF-IDF-and-Cosine-Similarity.md
+
+**Contributor:** Person 3
+
+**Index:** Replaced the planned video-similarity resource link with the created note.
+
+**Result:** Created a research note explaining vectorization, TF/IDF, cosine similarity, metadata-based use, and limitations. The ranking method and feature weighting remain open.
 # Act
 
 - 2026-11-06: Implemented and locally verified the CI pipeline; see [[CI Pipeline]].

@@ -43,23 +43,28 @@ flowchart LR
 ```
 
 The diagram shows responsibilities and required boundaries, not finalized class names or
-method signatures. Candidate discovery, ranking inputs, supported languages, summary input,
-quota cost estimation, cache policy, and provider/service contracts remain open.
+method signatures. Candidate discovery, supported languages, summary input, cache policy,
+and provider/service contracts remain open. The quota values and method-specific examples
+are owned by the [SRS quota requirements and appendix](../srs.md#appendix-a--reference-youtube-api-quota-verified-2026-11-07-against-googles-pages);
+verify them against Google's current quota documentation and the project's Quotas page
+before implementation.
 
 ## Module responsibilities
 
-| Module                         | Responsibility and constraints                                                                                                                                                                                                   |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MCP server                     | Register tools/resources and adapt protocol requests/responses; do not contain provider-specific API calls or core ranking logic.                                                                                                |
-| YouTube provider               | Isolate official YouTube Data API v3 operations behind a provider interface. Keep provider results separate from MCP response adaptation.                                                                                        |
-| Authentication                 | Obtain and handle authorised credentials for the operation with least-privilege OAuth scopes; store tokens safely and handle re-authorisation. Exact scopes and storage are open.                                                |
-| Quota management               | Estimate and account for workflow/request cost, reject work before any API call when the remaining budget is insufficient, and support caching/fixtures. The accounting and cache design are open.                               |
-| Video similarity               | Rank candidate videos using explainable available metadata; the feature set, candidate discovery, and scoring formula are open.                                                                                                  |
-| Channel similarity             | Rank candidate channels using available metadata; the candidate discovery and scoring method are open.                                                                                                                           |
-| Recommendations                | Use the authorised user's liked videos, subscriptions, and playlists; never infer or claim watch-history access.                                                                                                                 |
-| Engagement analysis            | Compute the required channel/category, time, duration, and period comparisons from the supported library sources. Exact metric definitions are open.                                                                             |
+| Module | Responsibility and constraints |
+|---|---|
+| MCP server | Register tools/resources and adapt protocol requests/responses; do not contain provider-specific API calls or core ranking logic. |
+| YouTube provider | Isolate official YouTube Data API v3 operations behind a provider interface. Keep provider results separate from MCP response adaptation. |
+| Authentication | Obtain and handle authorised credentials for the operation with least-privilege OAuth scopes; store tokens securely outside the repository/logs, refresh valid access tokens, detect expired/revoked credentials, and provide clear re-authorisation. Google's Testing-mode refresh tokens expire after seven days. Exact scopes and storage are open. |
+| Quota management | Estimate each planned provider operation from its current documented method cost; track general units and every applicable method-specific bucket separately. Include list-page calls and playlist writes. Check the complete workflow before the first API call and reject if any applicable remaining budget is insufficient. Never assume a uniform cost or fall back to an unknown/optimistic cost. The estimator, counter, and cache design are open. |
+| Metadata retrieval | Retrieve and normalize video/channel candidates and their available metadata through the provider. It does not rank candidates. Search calls and list-page calls count against their applicable quota budgets. |
+| Video similarity | Consume normalized metadata and calculate rankings separately from API retrieval. Weighted feature scores or TF-IDF with cosine similarity are suitable explainable candidates; feature selection, candidate discovery, weights, and final method remain open. |
+| Channel similarity | Consume normalized channel metadata and calculate rankings separately from API retrieval. Weighted metadata scoring or TF-IDF/cosine similarity over text features are candidate approaches; the final method and candidate discovery remain open. |
+| Recommendations | Use the authorised user's liked videos, subscriptions, and playlists; never infer or claim watch-history access. |
+| Engagement analysis | Compute the required channel/category, time, duration, and period comparisons from the supported library sources. Exact metric definitions are open. |
 | Playlist planning and creation | Validate topic, total duration, maximum video length, and language constraints; show the proposal and require explicit user confirmation before a write; handle accounts without a channel. Matching/tolerance behavior is open. |
-| Agent Skills                   | Guide workflows through the MCP-compatible client and tools. Skill instructions or tool output are not user confirmation. Skill implementations remain pending.                                                                  |
+| Agent Skills | Guide workflows through the MCP-compatible client and tools. Skill instructions or tool output are not user confirmation. Skill implementations remain pending. |
+| Video summary input | Open for SK-05: consider available video metadata, a transcript explicitly supplied by the user, or another team-approved compliant input. Do not scrape video pages or assume unofficial transcript APIs. Do not implement a summary source until OD-04 is decided. |
 
 For CI and validator implementation evidence, see the existing Brain note [[CI Pipeline]].
 
@@ -69,6 +74,11 @@ For CI and validator implementation evidence, see the existing Brain note [[CI P
   the provider. Insufficient budget means no API request.
 - Similarity uses project-computed metadata ranking, not an undocumented related-content
   endpoint.
+- The provider retrieves/normalizes metadata; similarity services score that data without
+  making provider calls. Metadata retrieval and ranking are separate responsibilities.
+- Quota estimates use operation-specific costs and all applicable quota buckets; pagination
+  and writes are included. Reject the whole workflow before making any API call if a bucket
+  would be exceeded.
 - Personalisation and analysis use only liked videos, subscriptions, and playlists.
 - A playlist write is gated by explicit user confirmation of the displayed proposal.
 - Titles, descriptions, tags, and other external metadata remain untrusted input.

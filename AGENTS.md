@@ -130,7 +130,7 @@ All contributors must preserve the following constraints:
 
 - **API compliance:** Official YouTube Data API v3 only.
 - **Quota:** Respect the default daily quota stated in the project specification (10,000 units for a new project). Do not create extra Google Cloud projects to obtain more quota.
-- **Quota accounting:** Track quota cost per request/workflow. Reject a workflow that would exceed the remaining budget **before making any API call**.
+- **Quota accounting:** Estimate and track the documented cost of each API operation in every applicable quota bucket; costs are not uniform. Count additional list pages and playlist writes. Reject a workflow that would exceed any remaining budget **before making any API call**; fail closed if a required cost is unknown. Use the current official quota table and verify project-specific limits before implementation.
 - **Caching:** Use caching and recorded fixtures where appropriate to reduce unnecessary API calls.
 - **OAuth:** Request minimum necessary scopes and store credentials/tokens safely.
 - **Re-authorisation:** OAuth refresh tokens in Testing mode expire after seven days. Design for re-authorisation and handle expired or revoked credentials clearly.
@@ -138,6 +138,7 @@ All contributors must preserve the following constraints:
 - **Input validation:** Validate all external inputs and tool parameters, including IDs, URLs, filters, durations, language and playlist constraints.
 - **Personal data:** Do not put real user personal data in fixtures or logs. Redact sensitive information from diagnostics.
 - **Error handling:** Handle malformed IDs, private/deleted videos, missing tags, `quotaExceeded`, `youtubeSignupRequired`, expired tokens and rate limiting.
+- **Live API tests:** Keep live tests separate from ordinary CI. Before enabling them, approve finite per-run caps for all applicable quota buckets; pre-check each call/page/write and stop before a cap is exceeded. Missing caps or unknown operation costs must fail closed; a zero budget disables calls.
 - **Least privilege:** Use only the OAuth scopes required for the operation being performed.
 - **No false capability claims:** Clearly report unavailable data or unsupported operations instead of fabricating results.
 
