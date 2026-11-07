@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a reproducible defect in the project.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: Do not include API keys, OAuth tokens, private user data, or unredacted logs.
+  - type: input
+    id: requirement
+    attributes:
+      label: Related requirement
+      description: Use an existing ID such as FR-01, NFR-02, TQ-04, or SK-05; leave blank if unknown.
+      placeholder: FR-01
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include only synthetic or redacted data.
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Relevant checks or logs
+      description: Remove secrets and personal data before posting.
+    validations:
+      required: false

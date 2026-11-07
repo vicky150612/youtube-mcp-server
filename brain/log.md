@@ -134,3 +134,6 @@ https://agentskills.io/specification
 - Related note [[YouTube MCP Server]] is planned but not yet created.
 - The specification page states no version or publication date.
 - `.claude/skills/brain-ingest/SKILL.md` was checked manually against the spec but not with `skills-ref validate`.
+# Act
+
+- 2026-11-06: Implemented and locally verified the CI pipeline; see [[CI Pipeline]].
