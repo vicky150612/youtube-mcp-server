@@ -1,0 +1,34 @@
+title = "YouTube MCP Server secret scanning"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "youtube-google-api-key"
+description = "Google API key used by YouTube Data API clients"
+regex = '''AIza[0-9A-Za-z_-]{35}'''
+keywords = ["AIza"]
+
+[[rules]]
+id = "google-oauth-client-secret"
+description = "Google OAuth client secret"
+regex = '''GOCSPX-[A-Za-z0-9_-]{28,}'''
+keywords = ["GOCSPX-"]
+
+[[rules]]
+id = "google-oauth-access-token"
+description = "Google OAuth access token"
+regex = '''ya29\.[0-9A-Za-z_-]{20,}'''
+keywords = ["ya29."]
+
+[[rules]]
+id = "google-oauth-refresh-token"
+description = "Google OAuth refresh token"
+regex = '''1//[0-9A-Za-z_-]{20,}'''
+keywords = ["1//"]
+
+[[rules]]
+id = "credential-assignment"
+description = "Credential value assigned to a sensitive field"
+regex = '''(?i)(?:api[_-]?key|access[_-]?token|refresh[_-]?token|client[_-]?secret)\s*[:=]\s*["']?([A-Za-z0-9._~+/-]{20,})'''
+secretGroup = 1
