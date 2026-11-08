@@ -281,3 +281,27 @@ note are taken from Activity 1 of 2026-11-07 above and need Person 2's confirmat
 
 **Result:** Added verified findings on desktop clients, loopback redirect, PKCE, refresh-token
 expiry reasons and YouTube scopes; the proposed project choice is ADR 0008.
+
+### Activity 6: Research Ingestion — YouTube Data API errors (skill evaluation E1)
+
+**Sources:** YouTube Data API — Errors — https://developers.google.com/youtube/v3/docs/errors
+(accessed 2026-11-08), plus the `playlistItems.list`, `playlistItems.insert`, `playlists.insert`
+and `channels.list` reference pages.
+
+**Note created:** [[YouTube-API-Errors|YouTube Data API Errors]]
+(`brain/resources/YouTube-API-Errors.md`)
+
+**Contributor:** `ChadDadChag` (team role not recorded); AI-assisted: yes
+
+**Result:** Created with the `brain-ingest` workflow as evaluation case E1
+(`docs/testing/skill-evaluations.md`); duplicate check found no existing note covering the error
+catalogue; added to the index; validated. Not stated in the source: a global rate-limit error
+and the JSON error format.
+
+### Activity 7: Duplicate check — YouTube Data API getting-started page (skill evaluation E2)
+
+**Source:** https://developers.google.com/youtube/v3/getting-started (accessed 2026-11-08)
+
+**Result:** No note created. The duplicate check found [[YouTube-Data-API|YouTube Data API]],
+which already covers the page and was re-verified today (Activity 4), so the correct outcome was
+to reuse the existing note.

@@ -34,6 +34,7 @@ Reusable research (`brain/resources/`):
 | [[YouTube-Channel-Resource\|YouTube Channel Resource]] | Channel lookup and similarity features | Person 1 |
 | [[YouTube-Playlist-Resource\|YouTube Playlist Resource]] | Playlist writes, likes playlist, errors | Person 1 |
 | [[YouTube-API-Quota-Management\|YouTube API Quota Management]] | Quota buckets, costs, pre-checks | Person 3 |
+| [[YouTube-API-Errors\|YouTube Data API Errors]] | Error catalogue for typed errors and negative tests | ChadDadChag (role unconfirmed) |
 | [[OAuth-Authentication\|OAuth 2.0 Authentication]] | OAuth flows, installed apps, scopes, tokens | Person 3 |
 | [[TF-IDF-and-Cosine-Similarity\|TF-IDF and Cosine Similarity]] | Explainable text similarity | Person 3 |
 | [[MCP-Architecture\|MCP Architecture]] | MCP participants, transports, discovery | Person 2 |
