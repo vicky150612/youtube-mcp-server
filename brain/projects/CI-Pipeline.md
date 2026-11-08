@@ -1,6 +1,9 @@
 ---
 title: GitHub Actions CI pipeline implementation
 type: ai-session
+author:
+  - Person 3
+created: 2026-11-07
 tags:
   - ai-session
   - ci

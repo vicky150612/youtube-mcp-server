@@ -1,6 +1,9 @@
 ---
 title: "MCP Tools and Resources"
 type: research
+author:
+  - Person 2
+created: 2026-11-07
 aliases:
   - "MCP Tools and Resources"
 tags:

@@ -305,3 +305,24 @@ and the JSON error format.
 **Result:** No note created. The duplicate check found [[YouTube-Data-API|YouTube Data API]],
 which already covers the page and was re-verified today (Activity 4), so the correct outcome was
 to reuse the existing note.
+
+### Activity 8: Contributor metadata completed from Git evidence (audit C1)
+
+**Notes updated:** [[Agent-Skills-Format|Agent Skills Format]],
+[[MCP-Architecture|MCP Architecture]], [[MCP-Tools-and-Resources|MCP Tools and Resources]] and
+[[CI-Pipeline|CI Pipeline]]; this completes the item left open in Activity 2.
+
+**Evidence:**
+- The three research notes were created in commit `8e80f55` (2026-11-07). The same commit added
+  their ingestion entries to this log under 2026-11-07 with "**Contributor:** Person 2"
+  (2026-11-07 Activities 2–4). Recorded: `author: [Person 2]`, `created: 2026-11-07`. The same
+  evidence supports Person 2's credit and date in the merged
+  [[YouTube-Data-API|YouTube Data API]] note (2026-11-07 Activity 1).
+- `CI-Pipeline.md` was created in commit `cedd5a0` (2026-11-07) by the Git identity that also
+  committed `a5caa34`, "brain: add research notes (Person 3)", whose notes carry
+  `author: Person 3`; the development plan assigns CI to Person 3. Recorded:
+  `author: [Person 3]`, `created: 2026-11-07` (the date the note first appears in Git). The
+  log line written in the same commit dates the CI work itself to 2026-11-06; Person 3 may
+  correct `created` to that date.
+
+**Result:** Brain validation passes with no errors.

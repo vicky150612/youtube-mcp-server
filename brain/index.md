@@ -15,7 +15,7 @@ AI-session and project-specific notes (`brain/projects/`):
 
 - [[ai-session-2026-11-07-srs-drafting|AI session — SRS drafting and API research]] (Person 1)
 - [[ai-session-2026-11-08-stage-1-audit|AI session — Stage 1 repository audit]]
-- [[CI-Pipeline|CI Pipeline]] — implementation record of the six-job CI pipeline and validators
+- [[CI-Pipeline|CI Pipeline]] — implementation record of the six-job CI pipeline and validators (Person 3)
 
 Planned, not yet created: a YouTube MCP Server project overview note.
 

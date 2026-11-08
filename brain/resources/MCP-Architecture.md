@@ -1,6 +1,9 @@
 ---
 title: "Model Context Protocol (MCP) — Architecture"
 type: research
+author:
+  - Person 2
+created: 2026-11-07
 aliases:
   - "MCP Architecture"
 tags:

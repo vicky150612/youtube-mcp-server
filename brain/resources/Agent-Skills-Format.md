@@ -1,6 +1,9 @@
 ---
 title: "Agent Skills Format and Specification"
 type: research
+author:
+  - Person 2
+created: 2026-11-07
 aliases:
   - "Agent Skills Format"
 tags:
