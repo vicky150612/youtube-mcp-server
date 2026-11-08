@@ -27,7 +27,13 @@
   capacity, external-fact tagging, corrected `NFR-09`, single open-decision register.
 - Updated architecture, testing, traceability, development plan, research allocation, stage
   review, PR template, `AGENTS.md` and `README.md` to match.
+- Completed missing note `author`/`created` metadata from Git evidence; ignore per-user
+  `.obsidian/` configuration; normalised line endings to LF with `.gitattributes`.
 
 ### Fixed
 
 - `scripts/frontmatter.py` no longer crashes on impossible dates (DEF-004).
+- Inline-code masking in the validators no longer crosses paragraphs, which could hide broken
+  links (DEF-010).
+- The CI build check passes on a fresh clone: `src/`, `tests/fixtures/` and all five PARA folders
+  are tracked, integrated from the build/structure work (DEF-006).

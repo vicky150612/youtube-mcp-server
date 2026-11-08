@@ -5,7 +5,33 @@ scope limitation. A passing validator/tooling suite is not evidence that product
 or live API behavior have been tested. Newest results first; older sections are kept unchanged
 as historical evidence.
 
-## 2026-11-08 — Stage 1 audit branch `fix/stage-1-audit-consistency` (current)
+## 2026-11-08 — Final Stage 1 completion pass (current)
+
+Fresh clone of `fix/stage-1-audit-consistency` at `75a21e5`, after integrating the PR-3 build and
+structure changes (`d1e2b17`) and the PR-2 credential-protection commit (cherry-picked from
+`63acd08`), completing note metadata from Git evidence and fixing DEF-010. Same pinned tools and
+environment as below; not a GitHub Actions run (nothing pushed).
+
+| Command | Result | Notes |
+|---|---|---|
+| `python scripts/ci_build.py` | Passed | 11 Python files; all required directories present |
+| `ruff check scripts tests` | Passed | |
+| `ruff format --check scripts tests` | Passed | 12 files already formatted |
+| `python -m unittest discover -s tests` | Passed; 76 tests | Skill validator 19, Brain validator 28, CI command probes 2, documentation validator 10, Markdown helpers 3, build check 8, repository hygiene 4, line endings 2 |
+| `python scripts/validate_skills.py --require brain-ingest` | Passed | 1 skill (`brain-ingest`) |
+| `python scripts/validate_brain.py` | Passed | 14 notes, 105 wikilinks, 0 errors |
+| `python scripts/validate_docs.py` | Passed | 31 Markdown files |
+| `gitleaks dir . --config .gitleaks.toml --redact --no-banner --exit-code 1` | Passed; no leaks | |
+| `gitleaks git . --config .gitleaks.toml --redact --no-banner --exit-code 1` | Passed; no leaks | Full history |
+| `git ls-files --eol` | 67 files `i/lf`, 3 empty `.gitkeep` files `i/none`; none CRLF | |
+| Exact-case check of 191 relative links and path sources against `git ls-files` | 0 mismatches | Guards against Windows-only passes on case-sensitive CI runners |
+| AST scan of all Python files for duplicate definitions/imports and unreachable code | 0 problems | |
+
+**Not run / unable to verify:** GitHub Actions results and the `main` ruleset (no authenticated
+GitHub access; nothing pushed); live YouTube API tests (no approved budget or test account);
+product tests (no application code, `OD-01`).
+
+## 2026-11-08 — Stage 1 audit branch, first pass (superseded by the section above)
 
 Local runs on Windows with the project-pinned tools in an isolated environment: Python 3.12.7,
 PyYAML 6.0.3, Ruff 0.17.4, Gitleaks 8.30.1 (release checksum verified). These are not GitHub
