@@ -50,12 +50,14 @@ the default branch. It requires a pull request and one approval, and blocks bran
 and non-fast-forward updates. The ruleset currently has **no required status checks**, does
 not require the branch to be up to date, and has a configured bypass actor. A separate
 branch-protection endpoint returned 404 because this repository uses a ruleset. Therefore,
-CI checks are not yet enforced for merge.
+CI checks are not yet enforced for merge. The 2026-11-08 audit could not re-check the ruleset
+because no authenticated GitHub access was available; the state above may have changed.
 
 Repository maintainers should review **Settings → Rules → Rulesets → Protect main** and:
 
-1. Add the six CI job checks after they have appeared at least once on GitHub: `Build`,
-   `Lint`, `Automated tests`, `Secret scanning`, `Skill validation`, and `Brain validation`.
+1. Add the seven CI job checks after they have appeared at least once on GitHub and are
+   consistently green: `Build`, `Lint`, `Automated tests`, `Secret scanning`,
+   `Skill validation`, `Brain validation` and `Documentation validation`.
    Select the actual displayed check-run contexts if GitHub prefixes them with the workflow
    name.
 2. Enable required status checks and, where appropriate, require the branch to be up to

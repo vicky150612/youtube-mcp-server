@@ -1,52 +1,109 @@
 # Requirement traceability
 
-**Status:** Initial inventory; product implementation and product tests remain pending.
-**Requirement source:** [`docs/srs.md`](srs.md) and [`AGENTS.md`](../AGENTS.md).
+**Status:** Updated 2026-11-08 on branch `fix/stage-1-audit-consistency` (not yet merged). No
+product code exists, so no functional or non-functional requirement is implemented or tested.
+**Requirement source:** [`docs/srs.md`](srs.md) (version 0.3.0, not approved).
 
-Issue and PR references below are real documentation work, not evidence that the related
-product requirement is implemented. `#14` added the SRS; `#15` added Person 1's API research
-notes; `#16` tracks this Part 7 documentation task. PR for #16 is pending. Do not treat
-validator tests as product behavior tests.
+Chain: requirement → GitHub issue → pull request → test → skill → Brain note (`SE-05`).
 
-| Requirement | GitHub issue | PR | Test evidence | Skill | Brain note |
+## Evidence rules
+
+- **PR numbers** come from merge commits in Git history: #11 (CI pipeline and workflow docs),
+  #12 (Second Brain and `brain-ingest`), #14 (SRS 0.2.0), #15 (Person 1 research notes),
+  #17 (Person 3 research notes). Their GitHub review records could not be verified from the
+  repository.
+- **Issue numbers:** only #16 is referenced in earlier documentation (a documentation task); its
+  state could not be verified. No implementation issues exist yet. "None yet" means no issue has
+  been filed; do not invent one.
+- **Branch** means the work is on `fix/stage-1-audit-consistency`, committed but not reviewed or
+  merged.
+- **Tests:** tooling tests validate repository checks, not product behaviour.
+- Brain-note links use the note files under `brain/`.
+
+## Functional requirements
+
+| Requirement | Issue | PR | Test evidence | Skill | Brain notes | Status |
+|---|---|---|---|---|---|---|
+| `FR-01` Similar videos | None yet | #14 (SRS) | None (product) | `video-to-playlist` (planned) | [Video](../brain/resources/YouTube-Video-Resource.md), [TF-IDF](../brain/resources/TF-IDF-and-Cosine-Similarity.md), [API](../brain/resources/YouTube-Data-API.md) | Specified |
+| `FR-02` Similar channels | None yet | #14 | None | — | [Channel](../brain/resources/YouTube-Channel-Resource.md), [TF-IDF](../brain/resources/TF-IDF-and-Cosine-Similarity.md) | Specified |
+| `FR-03` Recommendations | None yet | #14 | None | — | [Playlist](../brain/resources/YouTube-Playlist-Resource.md), [Video](../brain/resources/YouTube-Video-Resource.md) | Specified |
+| `FR-04` Engagement analysis | None yet | #14 | None | — | [Playlist](../brain/resources/YouTube-Playlist-Resource.md), [Video](../brain/resources/YouTube-Video-Resource.md) | Specified; `OD-05` open |
+| `FR-05` Playlist creation | None yet | #14; branch (two-phase confirmation, ADR 0007) | Specified only: CONF-01…15 in [testing](testing/README.md) | `video-to-playlist` (planned) | [Playlist](../brain/resources/YouTube-Playlist-Resource.md), [MCP Tools](../brain/resources/MCP-Tools-and-Resources.md) | Specified; design proposed |
+
+## Non-functional requirements
+
+| Requirement | Issue | PR | Test evidence | Brain notes | Status |
 |---|---|---|---|---|---|
-| FR-01 Similar videos | Pending: implementation issue | #14 (SRS only) | Pending: product ranking tests | Pending | [[YouTube Video Resource]], [[YouTube Data API Overview]] |
-| FR-02 Similar channels | Pending: implementation issue | #14 (SRS only) | Pending: product ranking tests | Pending | [[YouTube Channel Resource]], [[YouTube Data API Overview]] |
-| FR-03 Recommendations | Pending: implementation issue | #14 (SRS only) | Pending: recommendation tests | Pending | [[YouTube Data API Overview]], [[YouTube Playlist Resource]] |
-| FR-04 Engagement analysis | Pending: implementation issue | #14 (SRS only) | Pending: analysis tests | Pending | [[YouTube Video Resource]], [[YouTube Playlist Resource]] |
-| FR-05 Playlist creation | Pending: implementation issue | #14 (SRS only) | Pending: constraints, confirmation, and creation tests | `video-to-playlist` planned; implementation/evaluation pending | [[YouTube Playlist Resource]], [[YouTube Video Resource]] |
-| NFR-01 Official API only | Pending: implementation issue | #14 (SRS only) | Pending: provider/API compliance tests | N/A | [[YouTube Data API Overview]] |
-| NFR-02 Quota and caching | #16 (documentation only) | #14 (SRS); #16 PR pending | Pending: operation-cost, cache, and pre-check product tests | N/A | [[YouTube Data API Overview]], [[YouTube Playlist Resource]] |
-| NFR-03 OAuth and re-authorisation | #16 (documentation only) | #14 (SRS); #16 PR pending | Pending: scope, storage, refresh, expiry, and re-authorisation tests | N/A | Pending: OAuth research note |
-| NFR-04 Validation and untrusted metadata | #16 (documentation only) | #14 (SRS); #16 PR pending | Pending: validation and prompt-injection tests | `video-to-playlist` planned | [[YouTube Video Resource]] |
-| NFR-05 Secrets and personal data | Pending: implementation issue | #14 (SRS only) | Pending: security/privacy product tests | N/A | [[CI Pipeline]] |
-| NFR-06 Errors and capability reporting | #16 (documentation only) | #14 (SRS); #16 PR pending | Pending: negative tests, including no-channel account | N/A | [[YouTube Playlist Resource]], [[YouTube Channel Resource]] |
-| NFR-07 Provider/service boundaries | Pending: implementation issue | #14 (SRS only) | Pending: provider integration tests | N/A | [[MCP-Architecture]], [[YouTube Data API Overview]] |
-| NFR-08 Deterministic CI/live-test separation | #16 (documentation only) | #16 PR pending | Repository CI exists; product coverage and capped live workflow pending | `local-check` planned; implementation pending | [[CI Pipeline]] |
-| NFR-09 MCP compatibility | Pending: implementation issue | #14 (SRS only) | Pending: MCP contract and system tests | N/A | [[MCP-Architecture]], [[MCP-Tools-and-Resources]] |
-| NFR-10 Deterministic computation | Pending: implementation issue | #14 (SRS only) | Pending: repeatability tests for similarity and analytics | N/A | Pending: metadata similarity research note |
-| NFR-11 Documentation | #16 (documentation only) | #14 (SRS); #16 PR pending | Architecture and developer workflow docs exist; product API reference pending implementation | N/A | [[MCP-Architecture]] |
-| TQ-01 Unit tests | Pending: product tests | #14 (test requirement only) | Validator unit tests exist; product unit tests pending | N/A | [[CI Pipeline]] |
-| TQ-02 Integration tests | Pending | Pending | Pending: provider/service integration tests | N/A | Pending |
-| TQ-03 MCP system tests | Pending | Pending | Pending: FR-01 through FR-05 system tests | N/A | Pending |
-| TQ-04 Negative tests | #16 (scenarios documented) | #16 PR pending | Validator negatives exist; product quota/OAuth/confirmation/channel-less tests pending | N/A | [[CI Pipeline]], [[YouTube Playlist Resource]] |
-| TQ-05 CI/live-test separation | #16 (scenarios documented) | #16 PR pending | CI is fixture/local-only; capped live-test workflow pending | N/A | [[CI Pipeline]], [[YouTube Data API Overview]] |
-| TQ-06 Quota pre-check | #16 (scenarios documented) | #16 PR pending | Pending: reject before any API call for each applicable bucket | N/A | [[YouTube Data API Overview]], [[YouTube Playlist Resource]] |
-| TQ-07 Skill evaluations | Pending | Pending | Pending; evaluate each skill before stage submission | All planned skills | Pending |
-| TQ-08 Regression tests | Pending | Pending | Validator regressions exist; product regression coverage pending | N/A | [[CI Pipeline]] |
-| SK-01 `brain-ingest` | Pending | Pending | Pending: skill evaluation | `brain-ingest` implementation/evaluation not verified here | Pending |
-| SK-02 `brain-refine` | Pending | Pending | Pending: skill evaluation | `brain-refine` planned; implementation/evaluation pending | Pending |
-| SK-03 `brain-query` | Pending | Pending | Pending: skill evaluation | `brain-query` planned; implementation/evaluation pending | Pending |
-| SK-04 `local-check` | Pending | Pending | Pending: skill evaluation | `local-check` planned; implementation/evaluation pending | [[CI Pipeline]] |
-| SK-05 `video-to-playlist` | Pending | Pending | Pending: skill evaluation | `video-to-playlist` planned; implementation/evaluation pending | Pending |
+| `NFR-01` Official API only | None yet | #14 | None | [API](../brain/resources/YouTube-Data-API.md) | Specified |
+| `NFR-02.1` Quota budget | None yet | #14; branch (Appendix A canonical, ADR 0006) | None | [Quota](../brain/resources/YouTube-API-Quota-Management.md) | Specified |
+| `NFR-02.2` Quota tracking and pre-check | None yet | #14; branch (estimate limits) | Specified in [testing](testing/README.md) | [Quota](../brain/resources/YouTube-API-Quota-Management.md) | Specified |
+| `NFR-02.3` Unknown cost fails closed | None yet | Branch (proposed) | Specified | [Quota](../brain/resources/YouTube-API-Quota-Management.md) | Proposed |
+| `NFR-03.1` Minimum scopes | None yet | #14; branch (ADR 0008) | Specified | [OAuth](../brain/resources/OAuth-Authentication.md) | Specified; scopes proposed |
+| `NFR-03.2` Safe token storage | None yet | #14; branch (ADR 0008) | Specified | [OAuth](../brain/resources/OAuth-Authentication.md) | Specified |
+| `NFR-03.3` Re-authorisation | None yet | #14 | Specified | [OAuth](../brain/resources/OAuth-Authentication.md) | Specified |
+| `NFR-04.1` Input validation | None yet | #14 | Specified | [Errors](../brain/resources/YouTube-API-Errors.md) | Specified |
+| `NFR-04.2` Prompt-injection resistance | None yet | #14 | Specified (CONF-13) | [Video](../brain/resources/YouTube-Video-Resource.md) | Specified |
+| `NFR-04.3` Confirmation integrity | None yet | Branch (proposed, ADR 0007) | Specified (CONF-01…15) | [MCP Tools](../brain/resources/MCP-Tools-and-Resources.md) | Proposed |
+| `NFR-05.1` No secrets in repository | None yet | #11 (Gitleaks CI); `fix/gitignore-credential-protection` (local commit `63acd08`, not merged) | Gitleaks CI job; `tests/test_repository_hygiene.py` on that branch | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Partly implemented (repository level) |
+| `NFR-05.2` No real personal data | None yet | #14; branch (`tests/fixtures/README.md` on the PR-3 worktree, not committed) | None | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Specified |
+| `NFR-06.1` Channel-less accounts | None yet | #14 | Specified | [Errors](../brain/resources/YouTube-API-Errors.md), [Playlist](../brain/resources/YouTube-Playlist-Resource.md) | Specified |
+| `NFR-06.2` Graceful failure | None yet | #14; branch (typed errors in [interfaces](api/interfaces.md)) | Specified | [Errors](../brain/resources/YouTube-API-Errors.md) | Specified |
+| `NFR-07` Provider isolation | None yet | #14 | None | [MCP Architecture](../brain/resources/MCP-Architecture.md) | Specified |
+| `NFR-08.1` Testability | None yet | #14 | None (product) | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Specified |
+| `NFR-08.2` CI isolation from live API | None yet | #11 | CI uses no YouTube credentials | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Implemented for current tooling |
+| `NFR-08.3` Separate live tests | None yet | Branch (requirements documented) | None; workflow deferred (`OD-13`) | [Quota](../brain/resources/YouTube-API-Quota-Management.md) | Not implemented |
+| `NFR-08.4` Live-test caps fail closed | None yet | Branch (proposed) | Specified | [Quota](../brain/resources/YouTube-API-Quota-Management.md) | Proposed |
+| `NFR-09` MCP compatibility | None yet | #14; branch (wording, compatibility statement) | None | [MCP Architecture](../brain/resources/MCP-Architecture.md) | Specified |
+| `NFR-10` Deterministic computation | None yet | #14 | None | [TF-IDF](../brain/resources/TF-IDF-and-Cosine-Similarity.md) | Specified |
+| `NFR-11` Documentation | None yet | #11, #14; branch | `scripts/validate_docs.py` checks documentation links | [MCP Architecture](../brain/resources/MCP-Architecture.md) | Partly done (no user docs yet) |
 
-## Status and maintenance
+## Skill requirements
 
-- The Stage 1 baseline is outside this repository; see
-  [`docs/research/allocation.md`](research/allocation.md) for the documented assignment.
-- GitHub issue #16 is the current documentation issue. Existing issues/PRs that concern
-  repository setup are not presented as product implementation evidence.
-- Person 1's API research notes were merged in #15. OAuth and quota-management notes
-  assigned to another member remain pending.
-- Add implementation issue, PR, product test, skill-evaluation, and Brain-note references
-  only when their evidence exists.
+| Requirement | Issue | PR | Test evidence | Skill | Brain notes | Status |
+|---|---|---|---|---|---|---|
+| `SK-01` `brain-ingest` | None yet | #12; branch (rewrite) | `scripts/validate_skills.py --require brain-ingest`; template test in `tests/test_ci_validators.py`; [evaluation](testing/skill-evaluations.md) | `.claude/skills/brain-ingest` | [Agent Skills](../brain/resources/Agent-Skills-Format.md) | Implemented; self-evaluated |
+| `SK-02` `brain-refine` | None yet | — | None | Planned | [Agent Skills](../brain/resources/Agent-Skills-Format.md) | Not implemented |
+| `SK-03` `brain-query` | None yet | — | None | Planned | [Agent Skills](../brain/resources/Agent-Skills-Format.md) | Not implemented |
+| `SK-04` `local-check` | None yet | — | None | Planned | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Not implemented |
+| `SK-05` `video-to-playlist` | None yet | — | None | Planned | [MCP Tools](../brain/resources/MCP-Tools-and-Resources.md), [Playlist](../brain/resources/YouTube-Playlist-Resource.md) | Not implemented; `OD-04` open |
+
+## Testing requirements
+
+| Requirement | Issue | PR | Test evidence | Brain notes | Status |
+|---|---|---|---|---|---|
+| `TQ-01` Unit tests | None yet | #11; branch | Tooling unit tests in `tests/`; no product unit tests | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Tooling only |
+| `TQ-02` Integration tests | None yet | — | None | — | Not implemented |
+| `TQ-03` MCP system tests | None yet | — | None | [MCP Architecture](../brain/resources/MCP-Architecture.md) | Not implemented |
+| `TQ-04` Negative tests | None yet | Branch (scenarios) | Tooling negative tests; product scenarios specified | [Errors](../brain/resources/YouTube-API-Errors.md) | Specified |
+| `TQ-05` CI/live separation | None yet | #11 | CI is fixture/local-only | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Partly implemented |
+| `TQ-06` Quota pre-check | None yet | — | Specified | [Quota](../brain/resources/YouTube-API-Quota-Management.md) | Not implemented |
+| `TQ-07` Skill evaluations | None yet | Branch | [skill-evaluations.md](testing/skill-evaluations.md) (`brain-ingest`) | [Agent Skills](../brain/resources/Agent-Skills-Format.md) | Started (Stage 1) |
+| `TQ-08` Regression tests | None yet | Branch | Regression tests for tooling defects ([defects](testing/defects.md)) | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Tooling only |
+
+## Engineering, Second Brain and AI-policy requirements
+
+| Requirement | PR | Evidence | Status |
+|---|---|---|---|
+| `SE-01` SRS | #14; branch | [`docs/srs.md`](srs.md) 0.3.0 | Draft, not approved |
+| `SE-02` Architecture/UML | Branch | [Architecture overview](architecture/overview.md) (component and sequence diagrams) | Logical only; Stage 2 deliverable |
+| `SE-03` ADRs | Branch | [ADR index](adr/README.md): 0001–0008, all Proposed | Proposed |
+| `SE-04` Development plan | #14 (commit `c2d9f86`); branch | [`docs/development-plan.md`](development-plan.md) | Draft; owners proposed |
+| `SE-05` Traceability | Branch | This document | Updated |
+| `SE-06` Provider isolation (see `NFR-07`) | #14 | [Interfaces draft](api/interfaces.md) | Specified |
+| `SE-07` User and API docs (see `NFR-11`) | Branch | [API docs](api/README.md) | Partly done |
+| `SB-01` Wikilinks and requirement links | Branch | `scripts/validate_brain.py`; ADR 0003 | Enforced in CI |
+| `SB-02` Stage review notes | #14 (commit `a1dae74`); branch | [Stage 1 review](stage-reviews/stage-1-review.md) | Incomplete (Persons 2 and 3 sections pending) |
+| `SB-03` ADRs and skills cite Brain notes | Branch | `scripts/validate_docs.py` (ADRs), `scripts/validate_skills.py` (skills) | Enforced in CI |
+| `SB-04` `AGENTS.md` at root | #10 | [`AGENTS.md`](../AGENTS.md) | Done |
+| `SB-05` Brain changes through PRs | #12, #15, #17 | Merge history; this branch awaits a PR | Ongoing |
+| `SB-06` Every member authors notes | #12, #15, #17 | Commit authors and note `author` fields; mapping of Git accounts to Persons not recorded | Partly verifiable |
+| `AIP-01` Human review of AI changes | — | This branch awaits review | Pending |
+| `AIP-02` Members can explain merged work | — | Not verifiable from the repository | Unverifiable |
+| `AIP-03` AI-session notes | #15; branch | [2026-11-07](../brain/projects/ai-session-2026-11-07-srs-drafting.md), [2026-11-08](../brain/projects/ai-session-2026-11-08-stage-1-audit.md), [CI Pipeline](../brain/projects/CI-Pipeline.md) | Done for known sessions |
+| `AIP-04` No secrets in AI tools | — | Stated in AI-session notes | Self-reported |
+
+## Maintenance
+
+Update a row when its issue, PR, test, skill evaluation or Brain note actually exists. Person 1
+maintains this matrix (`docs/development-plan.md`). `scripts/validate_docs.py` checks that
+every ID used here is defined in the SRS and that every link resolves.

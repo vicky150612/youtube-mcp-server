@@ -1,7 +1,13 @@
 # Stage reviews
 
-Keep one review note per completed stage here. Do not mark a stage complete until its
-required deliverables, evaluations, tests, and review are present.
+This directory is the canonical location for stage reviews (`SB-02`, ADR 0004): one file per
+stage, `stage-N-review.md`. Do not mark a stage complete until its required deliverables,
+evaluations, tests and review are present. Each member writes their own reflections; nobody
+writes another member's reflections for them.
+
+| Stage | Review | Status |
+|---|---|---|
+| 1 | [stage-1-review.md](stage-1-review.md) | Draft; reflections from Persons 2 and 3 pending |
 
 ## Review template
 
@@ -13,15 +19,10 @@ required deliverables, evaluations, tests, and review are present.
 - Participants:
 - Related requirements:
 
-## What worked
+## <Member> — <area>
 
-## What did not
+**Work completed** · **What worked** · **What did not** · **Outstanding problems** ·
+**Lessons** · **Changes for the next stage**
 
-## Evidence and checks
-
-## What should change
-
-## Open follow-up work
+## Team summary
 ```
-
-No stage review is recorded by this structure document.

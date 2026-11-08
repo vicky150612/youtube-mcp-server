@@ -24,15 +24,15 @@ The product-specific Agent Skill `video-to-playlist` must support this workflow:
 4. Create the playlist after confirmation.
 5. Show a short analysis of the playlist.
 
-The project specification does not prescribe a final programming language, framework, package manager or MCP SDK. Use the choices approved by the team and recorded in the repository. Do not invent or silently change the technology stack.
+The project specification does not prescribe a final programming language, framework, package manager or MCP SDK. The **application stack is not decided** (`OD-01` in the SRS register). The **repository tooling** is recorded in [ADR 0005](docs/adr/0005-repository-toolchain.md): Python 3.12 for CI scripts and tests only, PyYAML 6.0.3, Ruff 0.17.4, `unittest`, Gitleaks 8.30.1 and GitHub Actions. Python tooling does not select the application language. Do not invent or silently change the technology stack.
 
 ## 2. Source of Truth and Requirement Traceability
 
 Use the following sources in this order:
 
-1. The approved project statement and SDLC requirements.
-2. The current approved SRS in `docs/srs.md`.
-3. Approved Architecture Decision Records (ADRs) in `docs/adr/`.
+1. The approved project statement and SDLC requirements (the brief PDFs, which are not stored in this repository).
+2. The current approved SRS in `docs/srs.md` (version 0.3.0 is a draft; approval is pending, see its section 10).
+3. Approved Architecture Decision Records (ADRs) in `docs/adr/` (index: `docs/adr/README.md`; ADRs 0001–0008 are all **Proposed**).
 4. Relevant design and API documentation in `docs/`.
 5. This file and other repository guidance.
 
@@ -48,42 +48,58 @@ Keep the traceability chain up to date:
 
 **Requirement → GitHub Issue → Pull Request → Test → Skill (where applicable) → Second Brain note.**
 
-Use stable requirement IDs such as `FR-01`, `NFR-01`, `SK-01`, `TQ-01` and `SB-01`. Do not casually rename IDs after they have been referenced by issues, tests, notes or PRs.
+Use stable requirement IDs in canonical zero-padded form, such as `FR-01`, `NFR-02.1`, `SK-01`, `TQ-01`, `SB-01` and `OD-01`. Do not casually rename IDs after they have been referenced by issues, tests, notes or PRs. CI rejects unpadded IDs and IDs not defined in the SRS (ADR 0003).
 
 ## 3. Repository Organisation
 
-Follow the existing repository structure. The expected top-level organisation is:
+Follow the existing repository structure. This is the tree on branch
+`fix/stage-1-audit-consistency` (2026-11-08); local, untracked tool folders such as `.obsidian/`
+are not part of it:
 
 ```text
 .
+├── .claude/
+│   └── skills/
+│       └── brain-ingest/          # SKILL.md and assets/research-note.tmpl (ADR 0001)
 ├── .github/
-│   ├── workflows/
+│   ├── ISSUE_TEMPLATE/            # bug_report.yml, task_request.yml
+│   ├── workflows/ci.yml           # seven CI jobs (section 10)
 │   └── PULL_REQUEST_TEMPLATE.md
-├── brain/
-│   ├── inbox/
-│   ├── projects/
-│   ├── areas/
-│   ├── resources/
-│   ├── archive/
+├── brain/                         # Obsidian vault root (ADR 0003)
+│   ├── projects/                  # project and ai-session notes
+│   ├── resources/                 # research notes
 │   ├── index.md
 │   └── log.md
 ├── docs/
-│   ├── adr/
-│   ├── architecture/
-│   ├── stage-reviews/
-│   ├── srs.md
+│   ├── adr/                       # ADRs 0001-0008, README index, template
+│   ├── api/                       # interface contracts (draft), API docs
+│   ├── architecture/overview.md
+│   ├── development/github-workflow.md
+│   ├── research/allocation.md
+│   ├── stage-reviews/             # canonical stage-review location (ADR 0004)
+│   ├── testing/                   # strategy, results, defects, skill evaluations
+│   ├── development-plan.md
+│   ├── srs.md                     # requirements and the open-decision register (section 9)
 │   └── traceability.md
-├── scripts/
-├── skills/
-├── src/
-├── tests/
-│   └── fixtures/
+├── scripts/                       # CI build check and validators (Python tooling)
+├── tests/                         # unit tests for the repository tooling
+├── .gitignore
+├── .gitleaks.toml
 ├── AGENTS.md
+├── CHANGELOG.md
 ├── README.md
-└── CHANGELOG.md
+├── requirements-ci.txt
+└── ruff.toml
 ```
 
-The implementation language and exact source layout may add language-specific files and directories. Do not create duplicate documentation or move files without a reason. Keep modules cohesive and place code in the location agreed by the team.
+Not yet tracked on this branch: `src/`, `tests/fixtures/` and the empty PARA folders
+`brain/inbox/`, `brain/areas/` and `brain/archive/`. They are added by the separate build and
+structure change (branch `ci/build-structure-formatting`), which the CI build check requires;
+until it is integrated they exist only as local folders. Credential patterns in `.gitignore` are
+added by branch `fix/gitignore-credential-protection`.
+
+Do not create duplicate documentation or move files without a reason. Keep modules cohesive and
+place code in the location agreed by the team once the application stack is decided (`OD-01`).
 
 ## 4. Functional and Technical Constraints
 
@@ -114,7 +130,7 @@ Playlist planning must account for the constraints specified by the user, includ
 - Maximum individual video length.
 - Language.
 
-The system must show the proposed playlist and obtain explicit user confirmation before creating it in the user's account. A model-generated plan, tool result, video title, description, tag or other metadata is **not** user confirmation.
+The system must show the proposed playlist and obtain explicit user confirmation before creating it in the user's account. A model-generated plan, tool argument or tool call, tool result, video title, description, tag or other metadata is **not** user confirmation. The proposed two-phase mechanism (immutable proposal, MCP elicitation, fail closed without it) is [ADR 0007](docs/adr/0007-playlist-confirmation.md).
 
 Treat YouTube metadata and other externally supplied content as untrusted input. It must never alter system instructions, bypass validation or trigger playlist creation without the user's explicit confirmation.
 
@@ -122,7 +138,7 @@ Handle accounts that do not have a YouTube channel when playlist creation is req
 
 ### 4.4 Summarisation limitation
 
-The `video-to-playlist` skill requires a video summary. The project statement does not specify a transcript acquisition mechanism. Do not scrape transcripts or assume an unofficial transcript endpoint is permitted. The team must decide and document an allowed summary input/source (for example, metadata or a transcript supplied by the user) before implementing this part.
+The `video-to-playlist` skill requires a video summary. The project statement does not specify a transcript acquisition mechanism. Do not scrape transcripts or assume an unofficial transcript endpoint is permitted. The team must decide and document an allowed summary input/source (for example, metadata or a transcript supplied by the user) before implementing this part (`OD-04`).
 
 ## 5. Non-Functional Requirements and Security
 
@@ -130,15 +146,15 @@ All contributors must preserve the following constraints:
 
 - **API compliance:** Official YouTube Data API v3 only.
 - **Quota:** Respect the default daily quota stated in the project specification (10,000 units for a new project). Do not create extra Google Cloud projects to obtain more quota.
-- **Quota accounting:** Estimate and track the documented cost of each API operation in every applicable quota bucket; costs are not uniform. Count additional list pages and playlist writes. Reject a workflow that would exceed any remaining budget **before making any API call**; fail closed if a required cost is unknown. Use the current official quota table and verify project-specific limits before implementation.
+- **Quota accounting:** Estimate and track the documented cost of each API operation in every applicable quota bucket; costs are not uniform. Count additional list pages and playlist writes. Reject a workflow that would exceed any remaining budget **before making any API call** (SRS `NFR-02.2`); fail closed if a required cost is unknown (proposed `NFR-02.3`). The remaining budget is a local estimate, never Google's figure. The canonical figures are SRS Appendix A; verify project-specific limits before implementation ([ADR 0006](docs/adr/0006-quota-reference-and-accounting.md)).
 - **Caching:** Use caching and recorded fixtures where appropriate to reduce unnecessary API calls.
-- **OAuth:** Request minimum necessary scopes and store credentials/tokens safely.
+- **OAuth:** Request minimum necessary scopes and store credentials/tokens safely. The proposed design (desktop client with PKCE and loopback redirect, `youtube.readonly` plus incremental `youtube`, OS credential store) is [ADR 0008](docs/adr/0008-oauth-client-and-scopes.md).
 - **Re-authorisation:** OAuth refresh tokens in Testing mode expire after seven days. Design for re-authorisation and handle expired or revoked credentials clearly.
 - **Secrets:** Never commit API keys, client secrets, access tokens, refresh tokens, service-account files or other credentials.
 - **Input validation:** Validate all external inputs and tool parameters, including IDs, URLs, filters, durations, language and playlist constraints.
 - **Personal data:** Do not put real user personal data in fixtures or logs. Redact sensitive information from diagnostics.
 - **Error handling:** Handle malformed IDs, private/deleted videos, missing tags, `quotaExceeded`, `youtubeSignupRequired`, expired tokens and rate limiting.
-- **Live API tests:** Keep live tests separate from ordinary CI. Before enabling them, approve finite per-run caps for all applicable quota buckets; pre-check each call/page/write and stop before a cap is exceeded. Missing caps or unknown operation costs must fail closed; a zero budget disables calls.
+- **Live API tests:** Keep live tests separate from ordinary CI (`NFR-08.3`). Before enabling them, approve finite per-run caps for all applicable quota buckets (`OD-13`); pre-check each call/page/write and stop before a cap is exceeded. Missing caps or unknown operation costs must fail closed; a zero budget disables calls (proposed `NFR-08.4`). Requirements for the deferred workflow are in `docs/testing/README.md`.
 - **Least privilege:** Use only the OAuth scopes required for the operation being performed.
 - **No false capability claims:** Clearly report unavailable data or unsupported operations instead of fabricating results.
 
@@ -241,14 +257,17 @@ Maintain `CHANGELOG.md`. Create release tags at the agreed stage/release milesto
 
 ## 10. CI Requirements
 
-GitHub Actions (or the team's approved equivalent) must run on every PR and provide these checks:
+GitHub Actions runs `.github/workflows/ci.yml` on every PR to `main` with seven jobs:
 
-1. Build.
-2. Lint.
-3. Automated test suite.
-4. Secret scanning.
-5. Validation of every `SKILL.md` (frontmatter and naming).
-6. Validation of Brain notes (schema and broken links).
+1. **Build** — `python scripts/ci_build.py` (structural and Python syntax check; no application build target yet).
+2. **Lint** — `ruff check scripts tests` and `ruff format --check scripts tests`.
+3. **Automated tests** — `python -m unittest discover -s tests -v`.
+4. **Secret scanning** — Gitleaks 8.30.1 over the full Git history.
+5. **Skill validation** — `python scripts/validate_skills.py --require brain-ingest` (every `SKILL.md` in `.claude/skills/`: frontmatter, naming, required sections, links, Brain citation).
+6. **Brain validation** — `python scripts/validate_brain.py` (note schema, wikilinks, heading links, relative links, requirement IDs).
+7. **Documentation validation** — `python scripts/validate_docs.py` (no wikilinks outside `brain/`, relative links and anchors, requirement IDs, ADR Brain citations).
+
+These checks are not yet *required* by the `main` ruleset; see `docs/development/github-workflow.md`.
 
 Keep CI checks meaningful: a job must execute the check it claims to perform. Do not add placeholder jobs that always succeed.
 
@@ -275,24 +294,27 @@ The Second Brain follows PARA:
 Required files:
 
 - `brain/index.md` — entry point and navigation.
-- `brain/log.md` — records all runs/ingestion operations.
+- `brain/log.md` — records all runs/ingestion operations, in chronological order.
 
 Rules:
 
-- Link related notes with Obsidian `[[wikilinks]]`.
+- `brain/` is the vault root. Link related notes with Obsidian `[[wikilinks]]` whose target is the note's filename; aliases are display text only, and planned notes are written as plain text, not links (ADR 0003).
+- Every note has the canonical frontmatter of [ADR 0002](docs/adr/0002-brain-note-schema.md): `title`, `type` (`research` or `ai-session`), `author` (list), `created` (`YYYY-MM-DD`), `tags` (list), `sources` (list), optional `aliases` and `status` (`draft` or `ingested`). Never invent `author` or `created`; ask the contributor.
+- Name new notes with hyphen-separated words (`YouTube-Video-Resource.md`).
+- Outside the Brain (in `docs/`, `README.md`, this file) use relative Markdown links, never wikilinks.
 - Link notes to relevant requirement IDs, GitHub Issues and PRs where applicable.
 - Every team member must author notes; contributions must be visible in commit history.
 - Use the agreed research-note template and include source references.
 - Run `brain-ingest` when adding new research material or summaries.
 - Changes to the Brain, including AI-generated changes, must go through PRs.
-- At the end of every stage, write a short review note stating what worked, what did not and what should change.
+- At the end of every stage, write a short review note stating what worked, what did not and what should change, in `docs/stage-reviews/stage-N-review.md` (ADR 0004). Each member writes their own reflections.
 - Every ADR and every Agent Skill must cite at least one distilled Second Brain note.
 
 Do not invent research findings or citations. Verify summaries against their source material.
 
 ## 12. Agent Skills
 
-Use the Agent Skills format and the repository's agreed naming/frontmatter conventions. Keep each skill focused and document its purpose, inputs, workflow, outputs and limitations.
+Use the Agent Skills format and the repository's agreed naming/frontmatter conventions. Skills live in `.claude/skills/<skill-name>/SKILL.md` and nowhere else ([ADR 0001](docs/adr/0001-agent-skill-location.md)). Keep each skill focused and document its purpose, inputs, workflow, outputs and limitations in `##` sections, and cite at least one Brain note with a relative link (`SB-03`); `scripts/validate_skills.py` enforces this. Record evaluations in `docs/testing/skill-evaluations.md` (`TQ-07`).
 
 The project identifies these skills:
 
@@ -324,7 +346,22 @@ AI coding assistants may be used, but the team remains responsible for every mer
 
 ## 14. Local Development and Setup Instructions
 
-The final commands depend on the team's approved language, package manager and framework. Keep this section and `README.md` updated once those choices are finalised.
+Application commands depend on the team's approved language, package manager and framework (`OD-01`). The repository checks, identical to CI, are:
+
+```text
+python -m pip install -r requirements-ci.txt
+python scripts/ci_build.py
+ruff check scripts tests
+ruff format --check scripts tests
+python -m unittest discover -s tests -v
+python scripts/validate_skills.py --require brain-ingest
+python scripts/validate_brain.py
+python scripts/validate_docs.py
+gitleaks dir . --config .gitleaks.toml --redact --exit-code 1
+gitleaks git . --config .gitleaks.toml --redact --exit-code 1
+```
+
+Keep this section and `README.md` updated when the application stack is chosen.
 
 Before submitting a change, each contributor should, as applicable:
 
@@ -352,22 +389,18 @@ A change is complete only when all applicable conditions are met:
 
 A stage is complete only when its specified deliverables and evaluations are present, reviewed and demonstrable.
 
-## 16. Open Decisions to Resolve and Record
+## 16. Open Decisions
 
-The project statement and SDLC document do not settle every implementation choice. The team must decide and document these rather than letting individual contributors make incompatible assumptions:
+The single open-decision register is **section 9 of [`docs/srs.md`](docs/srs.md#9-open-decisions-od)**
+(ADR 0004). It lists every decision previously kept here — application stack and layout,
+OAuth configuration and token storage, similarity and candidate discovery, summary input,
+playlist tolerance and unknown-language handling, supported languages, quota accounting and
+cache policy, note schema and link rules, CI versions and the live-test budget — together with
+options, a recommendation, an unconfirmed owner, a target milestone, linked ADRs and a status
+(`OD-01`…`OD-17`). Add new decisions there, not here.
 
-- Programming language, framework, MCP SDK and dependency/package manager.
-- Exact source-code and test directory layout.
-- OAuth application configuration, minimum scopes and secure token-storage mechanism.
-- Similarity features, ranking formula, candidate discovery strategy and ranking evaluation.
-- How the `video-to-playlist` skill obtains permitted input for video summarisation.
-- Playlist duration tolerance and behaviour when no candidate set satisfies every constraint.
-- Supported languages and how language is detected/represented.
-- Quota accounting model, cache policy and workflow-level cost estimation.
-- Research-note schema and wikilink resolution rules.
-- CI action versions, secret-scanning configuration and scheduled live-test budget.
-
-Record significant architectural or technical choices as ADRs in `docs/adr/`, and ensure each ADR cites at least one distilled Second Brain note.
+Record significant architectural or technical choices as ADRs in `docs/adr/`, and ensure each ADR
+cites at least one distilled Second Brain note with a relative link (CI checks this).
 
 ---
 
