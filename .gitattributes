@@ -1,0 +1,14 @@
+# Line endings (Stage 1 audit N-5): store every text file with LF in Git and check it out
+# with LF on all platforms, regardless of core.autocrlf. tests/test_line_endings.py fails if a
+# tracked text file is stored with CRLF.
+* text=auto eol=lf
+
+# Binary formats: never convert.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
