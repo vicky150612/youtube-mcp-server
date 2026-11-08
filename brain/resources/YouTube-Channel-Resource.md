@@ -46,5 +46,5 @@ A `channel` resource describes one YouTube channel. It is the input for `FR-02` 
 
 ## Related Notes
 - [[YouTube Data API Overview]]
-- [[YouTube Video Resource]]
-- [[YouTube Playlist Resource]]
+- [[YouTube-Video-Resource|YouTube Video Resource]]
+- [[YouTube-Playlist-Resource|YouTube Playlist Resource]]

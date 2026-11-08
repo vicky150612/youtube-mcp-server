@@ -57,6 +57,6 @@ The points below are project recommendations, not additional guarantees from Goo
 ## Related Notes
 
 - [[YouTube-Data-API|YouTube Data API]]
-- [[YouTube Playlist Resource]]
+- [[YouTube-Playlist-Resource|YouTube Playlist Resource]]
 - [[OAuth-Authentication|OAuth 2.0 Authentication]]
 - [[TF-IDF-and-Cosine-Similarity|TF-IDF and Cosine Similarity]]

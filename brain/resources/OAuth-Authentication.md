@@ -56,4 +56,4 @@ The project needs user authorization for personal library access and playlist cr
 
 - [[YouTube-Data-API|YouTube Data API]]
 - [[YouTube-API-Quota-Management|YouTube API Quota Management]]
-- [[YouTube Playlist Resource]]
+- [[YouTube-Playlist-Resource|YouTube Playlist Resource]]

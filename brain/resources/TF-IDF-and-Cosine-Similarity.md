@@ -59,7 +59,7 @@ This is a candidate approach for [FR-01 Similar Videos](../../docs/srs.md) and [
 
 ## Related Notes
 
-- [[YouTube Video Resource]]
-- [[YouTube Channel Resource]]
+- [[YouTube-Video-Resource|YouTube Video Resource]]
+- [[YouTube-Channel-Resource|YouTube Channel Resource]]
 - [[YouTube-Data-API|YouTube Data API]]
 - [[YouTube-API-Quota-Management|YouTube API Quota Management]]

@@ -45,7 +45,7 @@ The YouTube Data API v3 is the official way for an application to read and manag
 - Quota costs table: https://developers.google.com/youtube/data/determine_quota_cost (last updated 2026-11-03; accessed 2026-11-07)
 
 ## Related Notes
-- [[YouTube Video Resource]]
-- [[YouTube Channel Resource]]
-- [[YouTube Playlist Resource]]
+- [[YouTube-Video-Resource|YouTube Video Resource]]
+- [[YouTube-Channel-Resource|YouTube Channel Resource]]
+- [[YouTube-Playlist-Resource|YouTube Playlist Resource]]
 - Planned (other members): YouTube Quota Management, YouTube OAuth Authentication

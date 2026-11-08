@@ -184,4 +184,4 @@ https://agentskills.io/specification
 **Result:** Created a research note explaining vectorization, TF/IDF, cosine similarity, metadata-based use, and limitations. The ranking method and feature weighting remain open.
 # Act
 
-- 2026-11-06: Implemented and locally verified the CI pipeline; see [[CI Pipeline]].
+- 2026-11-06: Implemented and locally verified the CI pipeline; see [[CI-Pipeline|CI Pipeline]].

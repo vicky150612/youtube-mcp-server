@@ -52,6 +52,6 @@ The `playlist` and `playlistItem` resources cover everything `FR-05` writes and 
 
 ## Related Notes
 - [[YouTube Data API Overview]]
-- [[YouTube Video Resource]]
-- [[YouTube Channel Resource]]
+- [[YouTube-Video-Resource|YouTube Video Resource]]
+- [[YouTube-Channel-Resource|YouTube Channel Resource]]
 - Planned (other members): YouTube OAuth Authentication, YouTube Quota Management

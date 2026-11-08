@@ -51,6 +51,6 @@ A `video` resource represents one YouTube video. Its metadata is the raw materia
 
 ## Related Notes
 - [[YouTube Data API Overview]]
-- [[YouTube Channel Resource]]
-- [[YouTube Playlist Resource]]
+- [[YouTube-Channel-Resource|YouTube Channel Resource]]
+- [[YouTube-Playlist-Resource|YouTube Playlist Resource]]
 - Planned (other members): Cosine Similarity and TF-IDF
