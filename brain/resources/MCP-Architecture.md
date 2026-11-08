@@ -7,8 +7,8 @@ tags:
   - research
   - youtube-mcp
   - mcp
-source: "https://modelcontextprotocol.io/docs/learn/architecture"
-protocol_version: "2026-07-28"
+sources:
+  - "https://modelcontextprotocol.io/docs/learn/architecture"
 ---
 
 # Model Context Protocol (MCP) — Architecture
@@ -187,5 +187,5 @@ None assigned yet.
 
 - [[YouTube-Data-API|YouTube Data API]]
 - [[MCP-Tools-and-Resources|MCP Tools and Resources]]
-- [[YouTube MCP Server]] *(planned — not yet created)*
-- [[OAuth Authentication]] *(planned — not yet created)*
+- [[OAuth-Authentication|OAuth 2.0 Authentication]]
+- YouTube MCP Server project note (planned, not yet created)

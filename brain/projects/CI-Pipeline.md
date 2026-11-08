@@ -1,6 +1,9 @@
 ---
 title: GitHub Actions CI pipeline implementation
 type: ai-session
+tags:
+  - ai-session
+  - ci
 sources:
   - AGENTS.md
   - README.md
@@ -30,6 +33,10 @@ language or inventing a permanent Brain note schema.
   for both direct script and module execution, and the CLI regression tests now pass.
 - The initial synthetic private-key sample was too short to match Gitleaks' private-key rule.
   A representative PEM-shaped fixture confirmed detection.
+
+## Update 2026-11-08
+
+- Skill validation now scans `.claude/skills/` and fails when no skill is found (project ADR 0001); Brain validation enforces the canonical note schema (ADR 0002); a documentation validator was added (ADR 0003). The "empty skills state" described above is historical.
 
 ## Outcome
 

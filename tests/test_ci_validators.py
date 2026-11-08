@@ -300,6 +300,11 @@ class BrainValidatorTests(unittest.TestCase):
         _, _, errors = validate_brain(self.root)
         self.assertEqual(errors, [])
 
+    def test_escaped_alias_separator_in_table_passes(self) -> None:
+        self.write_note("resources/Target.md", VALID_NOTE)
+        self.write_note("index.md", "| Note |\n|---|\n| [[Target\\|Display]] |\n")
+        self.assertEqual(validate_brain(self.root)[2], [])
+
     def test_frontmatter_alias_is_not_a_link_target(self) -> None:
         target = VALID_NOTE.replace("type: research\n", "type: research\naliases:\n  - Nice Name\n")
         self.write_note("resources/Target.md", target)

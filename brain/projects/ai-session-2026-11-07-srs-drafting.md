@@ -3,7 +3,7 @@ sources:
   - "docs/srs.md"
   - "docs/development-plan.md"
   - "brain/resources/YouTube-Channel-Resource.md"
-  - "brain/resources/YouTube Data API Overview.md"
+  - "brain/resources/YouTube-Data-API.md"
   - "brain/resources/YouTube-Playlist-Resource.md"
   - "brain/resources/YouTube-Video-Resource.md"
 title: AI session — SRS drafting and API research
@@ -12,7 +12,8 @@ tags:
   - srs
   - youtube
 type: ai-session
-author: Person 1
+author:
+  - Person 1
 created: 2026-11-07
 ---
 
@@ -36,4 +37,4 @@ Claude (chat). No secrets, tokens or credentials were shared (AIP-04).
 Reviewer: Person 2 (primary reviewer for Person 1). To be recorded in the PR.
 
 ## Related
-`docs/srs.md`, `docs/traceability.md`, [[YouTube Data API Overview]]
+`docs/srs.md`, `docs/traceability.md`, [[YouTube-Data-API|YouTube Data API]] (Person 1's overview note from this session was merged into it on 2026-11-08), [[YouTube-Video-Resource|YouTube Video Resource]], [[YouTube-Channel-Resource|YouTube Channel Resource]], [[YouTube-Playlist-Resource|YouTube Playlist Resource]]

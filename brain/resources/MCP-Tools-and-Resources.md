@@ -7,11 +7,9 @@ tags:
   - research
   - youtube-mcp
   - mcp
-source: "https://modelcontextprotocol.io/docs/learn/server-concepts"
 sources:
   - "https://modelcontextprotocol.io/docs/learn/server-concepts"
   - "https://modelcontextprotocol.io/docs/learn/client-concepts"
-protocol_version: "2026-07-28 (inferred from linked specification pages)"
 ---
 
 # MCP Tools and Resources
@@ -248,5 +246,5 @@ None assigned yet.
 
 - [[MCP-Architecture|MCP Architecture]]
 - [[YouTube-Data-API|YouTube Data API]]
-- [[YouTube MCP Server]] *(planned — not yet created)*
-- [[OAuth Authentication]] *(planned — not yet created)*
+- [[OAuth-Authentication|OAuth 2.0 Authentication]]
+- YouTube MCP Server project note (planned, not yet created)

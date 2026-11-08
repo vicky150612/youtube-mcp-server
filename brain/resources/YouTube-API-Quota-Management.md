@@ -11,7 +11,8 @@ tags:
 sources:
   - "https://developers.google.com/youtube/v3/determine_quota_cost"
   - "https://developers.google.com/youtube/v3/docs/errors"
-author: Person 3
+author:
+  - Person 3
 created: 2026-11-07
 ---
 
@@ -31,7 +32,7 @@ The YouTube Data API v3 assigns quota to API requests. Each Google Cloud project
 
 ## Important Findings
 
-- The quota documentation gives defaults of **10,000 units per day** for endpoints in the general pool, **100 `search.list` calls per day**, and **100 `videos.insert` calls per day**. The two method-specific buckets are separate; each call costs one quota in its respective bucket. Daily quotas reset at midnight Pacific Time. Project-specific limits and the current quota table should be checked in Google Cloud Console because defaults can change.
+- The quota documentation gives defaults of **10,000 units per day** for endpoints in the general pool, **100 `search.list` calls per day**, and **100 `videos.insert` calls per day**. The two method-specific buckets are separate; each call costs one quota in its respective bucket. Daily quotas reset at midnight Pacific Time. Project-specific limits and the current quota table should be checked in Google Cloud Console because defaults can change. These figures were re-verified on 2026-11-08; the project's canonical copy used by requirements is [SRS Appendix A](../../docs/srs.md#appendix-a--reference-youtube-api-quota) (project ADR 0006), and this note keeps them as the research record of what was verified.
 - Common list methods, including `channels.list`, `videos.list`, `playlists.list` and `playlistItems.list`, cost **1 unit per call** in the published table. `playlists.insert` and `playlistItems.insert` each cost **50 units per call**. Additional pages are separate calls with their method's cost.
 - All API requests, including invalid requests, incur at least one quota point. Validate parameters before making a request.
 
@@ -39,15 +40,14 @@ The YouTube Data API v3 assigns quota to API requests. Each Google Cloud project
 
 The points below are project recommendations, not additional guarantees from Google's quota documentation:
 
-- Before any workflow makes an API call, estimate all planned operations, pages and writes; track the cost in every applicable bucket. Reject the workflow before its first call if any bucket is insufficient or a required cost is unknown. This project rule is captured by [NFR-02.1 and NFR-02.2](../../docs/srs.md) and [TQ-06](../../docs/srs.md).
+- Before any workflow makes an API call, estimate all planned operations, pages and writes; track the cost in every applicable bucket. Reject the workflow before its first call if any bucket is insufficient or a required cost is unknown. This project rule is captured by `NFR-02.1`, `NFR-02.2`, the proposed `NFR-02.3` and `TQ-06`.
 - Cache eligible reads using keys that include the request parameters and, for private/user data, the appropriate user context. Choose explicit freshness rules. Do not assume a conditional request or `304 Not Modified` is quota-free unless the current API documentation confirms it.
 - Convert `quotaExceeded` to a clear user-facing error and stop the affected workflow; retrying the same call without a quota change does not resolve the exhausted-budget condition.
 - Similar-video/channel search, personal-library reads and playlist writes draw on different methods and possibly different quota buckets. Estimate each method separately; a single aggregate request count is not sufficient.
 
 ## Related Requirements
 
-- [FR-01 — Similar Videos](../../docs/srs.md), [FR-02 — Similar Channels](../../docs/srs.md), [FR-03 — Recommendations](../../docs/srs.md), [FR-04 — Engagement Analysis](../../docs/srs.md), and [FR-05 — Playlist Creation](../../docs/srs.md).
-- [NFR-02 — Quota and caching](../../docs/srs.md), especially NFR-02.1 and NFR-02.2; [TQ-04 — Negative tests](../../docs/srs.md); [TQ-06 — Quota pre-check](../../docs/srs.md).
+`FR-01`, `FR-02`, `FR-03`, `FR-04`, `FR-05`, `NFR-02.1`, `NFR-02.2`, `TQ-04`, `TQ-06`. Requirement source: [SRS](../../docs/srs.md).
 
 ## Sources
 
@@ -57,6 +57,7 @@ The points below are project recommendations, not additional guarantees from Goo
 ## Related Notes
 
 - [[YouTube-Data-API|YouTube Data API]]
+- [[YouTube-Channel-Resource|YouTube Channel Resource]]
 - [[YouTube-Playlist-Resource|YouTube Playlist Resource]]
 - [[OAuth-Authentication|OAuth 2.0 Authentication]]
 - [[TF-IDF-and-Cosine-Similarity|TF-IDF and Cosine Similarity]]

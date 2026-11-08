@@ -11,7 +11,8 @@ tags:
 sources:
   - "https://scikit-learn.org/stable/modules/feature_extraction.html"
   - "https://scikit-learn.org/stable/modules/metrics.html#cosine-similarity"
-author: Person 3
+author:
+  - Person 3
 created: 2026-11-07
 ---
 
@@ -45,12 +46,11 @@ The following is a project application, not a decision that this algorithm has b
 3. Fit or apply a consistent TF-IDF vocabulary to the source and candidates, calculate cosine similarity, and rank candidates by score.
 4. Evaluate field weighting, stop-word/tokenization choices and candidate discovery with fixtures before choosing a production method.
 
-This is a candidate approach for [FR-01 Similar Videos](../../docs/srs.md) and [FR-02 Similar Channels](../../docs/srs.md); it does not rely on a YouTube related-video or related-channel endpoint. The final feature set, weights, candidate strategy and evaluation method remain open. Identical inputs and preprocessing should yield deterministic rankings under [NFR-10](../../docs/srs.md), with unit coverage under [TQ-01](../../docs/srs.md).
+This is a candidate approach for `FR-01` and `FR-02`; it does not rely on a YouTube related-video or related-channel endpoint. The final feature set, weights, candidate strategy and evaluation method remain open. Identical inputs and preprocessing should yield deterministic rankings under `NFR-10`, with unit coverage under `TQ-01`.
 
 ## Related Requirements
 
-- [FR-01 — Similar Videos](../../docs/srs.md) and [FR-02 — Similar Channels](../../docs/srs.md).
-- [NFR-07 — Provider isolation](../../docs/srs.md), [NFR-10 — Deterministic computation](../../docs/srs.md), and [TQ-01 — Unit tests](../../docs/srs.md).
+`FR-01`, `FR-02`, `NFR-07`, `NFR-10`, `TQ-01`. Requirement source: [SRS](../../docs/srs.md).
 
 ## Sources
 

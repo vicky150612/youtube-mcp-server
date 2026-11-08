@@ -11,7 +11,10 @@ tags:
 sources:
   - "https://developers.google.com/identity/protocols/oauth2"
   - "https://developers.google.com/youtube/v3/guides/auth/server-side-web-apps"
-author: Person 3
+  - "https://developers.google.com/youtube/v3/guides/auth/installed-apps"
+  - "https://developers.google.com/identity/protocols/oauth2/scopes"
+author:
+  - Person 3
 created: 2026-11-07
 ---
 
@@ -34,26 +37,40 @@ OAuth 2.0 lets an application obtain limited, user-approved access to resources 
 - A web-server application's redirect URI must match an authorized URI configured for its OAuth client. The app should protect authorization codes and keep client-secret files outside publicly accessible locations and source control.
 - The server-side web-app guide recommends offline access when the application needs to refresh tokens without asking the user to re-consent.
 - Access tokens have limited lifetimes. When one expires, the application can use a valid refresh token to obtain another access token. If usable credentials are unavailable, the user must authorize again.
-- **Project constraint:** the SRS records that refresh tokens issued while Google's OAuth consent screen is in Testing mode expire after seven days; the implementation must provide a clear re-authorisation path ([NFR-03.3](../../docs/srs.md)).
+- **Project constraint:** the SRS records that refresh tokens issued while Google's OAuth consent screen is in Testing mode expire after seven days; the implementation must provide a clear re-authorisation path (`NFR-03.3`). Google's OAuth overview confirms this: an external-user-type project in "Testing" status receives refresh tokens that expire in 7 days unless only basic profile scopes are requested. Refresh tokens also stop working when revoked, after six months unused, or when the limit of 100 refresh tokens per Google Account per OAuth client is exceeded (the oldest is invalidated without warning).
+
+### Installed (desktop) applications — added 2026-11-08
+
+The findings above describe the web-server flow. A locally run MCP server (stdio transport) is an installed application, for which Google's installed-app guide states:
+
+- Desktop apps "are public clients and cannot keep secrets confidential"; the client secret is not treated as confidential (it must still not be committed).
+- The **loopback IP address** redirect, with an HTTP listener on a random available port, is the recommended mechanism on Windows, macOS and Linux.
+- **PKCE is required** ("Always use PKCE"), with the S256 method recommended.
+- The manual copy/paste (out-of-band) and custom URI scheme methods are no longer supported.
+
+### YouTube scopes
+
+Google's scope list describes `youtube.readonly` as "View your YouTube account", `youtube` as "Manage your YouTube account" and `youtube.force-ssl` as "See, edit, and permanently delete your YouTube videos, ratings, comments and captions". `playlists.insert` and `playlistItems.insert` each accept `youtubepartner`, `youtube` or `youtube.force-ssl`.
 
 ## Relevance to Our Project
 
-The project needs user authorization for personal library access and playlist creation. Use the OAuth client type appropriate to the eventual application architecture, store tokens securely outside the repository and logs, request only the scopes required by each supported operation, and report expired, revoked or insufficiently scoped credentials clearly. The application stack, exact scope set and token-storage mechanism remain undecided.
+The project needs user authorization for personal library access and playlist creation. Use the OAuth client type appropriate to the eventual application architecture, store tokens securely outside the repository and logs, request only the scopes required by each supported operation, and report expired, revoked or insufficiently scoped credentials clearly. The project's proposed choice (desktop client, PKCE, loopback redirect, `youtube.readonly` for reads, `youtube` requested incrementally for playlist creation, refresh token in the operating system credential store) is recorded in the project's ADR 0008 and awaits team approval; it depends on the transport decision (`OD-15`).
 
 ## Related Requirements
 
-- [FR-03 — Recommendations](../../docs/srs.md) and [FR-04 — Engagement Analysis](../../docs/srs.md) use the authorised user's library.
-- [FR-05 — Playlist Creation](../../docs/srs.md) performs writes only in the authorised user's account.
-- [NFR-03 — OAuth and re-authorisation](../../docs/srs.md), especially NFR-03.1 through NFR-03.3; [TQ-04 — Negative tests](../../docs/srs.md).
+`FR-03`, `FR-04` (library reads), `FR-05` (writes in the authorised user's account), `NFR-03.1`, `NFR-03.2`, `NFR-03.3`, `TQ-04`. Requirement source: [SRS](../../docs/srs.md).
 
 ## Sources
 
 - **OAuth 2.0** — Google Identity, Google for Developers. https://developers.google.com/identity/protocols/oauth2 (accessed 2026-11-07; publication/update date not stated on the page).
 - **Using OAuth 2.0 for Web Server Applications** — Google Identity, Google for Developers. https://developers.google.com/youtube/v3/guides/auth/server-side-web-apps (redirects to Google's web-server OAuth guide; accessed 2026-11-07; publication/update date not stated on the page).
-- **YouTube MCP Server SRS** — project-specific seven-day Testing-mode token constraint, NFR-03.3. [SRS](../../docs/srs.md).
+- **OAuth 2.0 for Mobile & Desktop Apps** — Google for Developers. https://developers.google.com/youtube/v3/guides/auth/installed-apps (accessed 2026-11-08).
+- **OAuth 2.0 Scopes for Google APIs** — Google for Developers. https://developers.google.com/identity/protocols/oauth2/scopes (accessed 2026-11-08).
+- **YouTube MCP Server SRS** — project-specific seven-day Testing-mode token constraint, `NFR-03.3`. [SRS](../../docs/srs.md).
 
 ## Related Notes
 
 - [[YouTube-Data-API|YouTube Data API]]
 - [[YouTube-API-Quota-Management|YouTube API Quota Management]]
 - [[YouTube-Playlist-Resource|YouTube Playlist Resource]]
+- [[MCP-Architecture|MCP Architecture]]

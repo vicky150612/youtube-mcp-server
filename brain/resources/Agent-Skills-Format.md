@@ -7,7 +7,8 @@ tags:
   - research
   - youtube-mcp
   - agent-skills
-source: "https://agentskills.io/specification"
+sources:
+  - "https://agentskills.io/specification"
 ---
 
 # Agent Skills Format and Specification
@@ -172,6 +173,7 @@ description: A description of what this skill does and when to use it.
 - **Keep instructions lean.** If `brain-ingest` grows (e.g. the research-note template or log format), moving that material into `references/` or `assets/` would follow the progressive-disclosure guidance.
 - **Future project skills:** any additional skills (e.g. for working with the YouTube MCP server) should use the same structure, valid names that match their directory, and clear trigger-oriented descriptions.
 - **Relationship to MCP:** Agent Skills (instructions loaded by an agent) and MCP Tools (functions exposed by a server) are separate mechanisms. The specification does not describe how they interact; any combination in our project would be a design decision. See [[MCP-Tools-and-Resources|MCP Tools and Resources]].
+- **Update 2026-11-08:** the `brain-ingest` skill was rewritten with a "Use when…" description and a note template in `assets/`, and CI now validates it in `.claude/skills/` (see the project's ADR 0001). The manual check above records the 2026-11-07 state.
 - **Portability caution:** `allowed-tools` is experimental and implementation-dependent, so we should not rely on it for consistent behaviour across agents.
 
 ## Related Requirements
@@ -190,4 +192,4 @@ None assigned yet.
 
 - [[MCP-Tools-and-Resources|MCP Tools and Resources]]
 - [[MCP-Architecture|MCP Architecture]]
-- [[YouTube MCP Server]] _(planned — not yet created)_
+- YouTube MCP Server project note (planned, not yet created)

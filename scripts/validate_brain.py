@@ -182,7 +182,8 @@ def _resolve_note(target: str, brain_directory: Path, notes: list[Path]) -> Path
 def _wikilink_error(
     link_text: str, source: Path, brain_directory: Path, notes: list[Path]
 ) -> str | None:
-    target = link_text.split("|", maxsplit=1)[0].strip()
+    # Inside Markdown tables Obsidian requires the alias separator to be escaped as "\|".
+    target = link_text.replace("\\|", "|").split("|", maxsplit=1)[0].strip()
     note_part, separator, reference = target.partition("#")
     block_part, block_separator, _ = note_part.partition("^")
     if block_separator:
