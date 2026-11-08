@@ -1,286 +1,189 @@
 ---
 name: brain-ingest
-description: Ingest research into the project Second Brain by creating sourced PARA notes, adding Obsidian links, and updating the index and activity log.
+description: Ingest research into the project Second Brain as a sourced, schema-valid PARA note with Obsidian links, index and log updates, validation and a pull request. Use when adding research from official documentation, articles, papers or supplied text to brain/, or when processing an existing draft note into the Brain.
 ---
 
 # Brain Ingest
 
 ## 1. Purpose
 
-Convert research material into useful, structured and interconnected Markdown notes in the project's Obsidian Second Brain.
+Convert research material into structured, verified and interconnected Markdown notes in the
+project's Obsidian Second Brain (`brain/`), so that all three team members can reuse the
+knowledge and cite it from ADRs and skills (`SB-01`, `SB-03`).
 
-The goal is to transform raw information into reusable knowledge that all team members can understand and reference.
+The note format follows the canonical schema in
+[ADR 0002](../../../docs/adr/0002-brain-note-schema.md); links and requirement references
+follow [ADR 0003](../../../docs/adr/0003-linking-naming-and-requirement-references.md). The
+Agent Skills conventions this skill follows are summarised in the Brain note
+[Agent Skills Format](../../../brain/resources/Agent-Skills-Format.md).
 
 ## 2. When to Use
 
-Use this skill when:
-
 - Adding research from official documentation, articles, papers or PDFs.
 - Recording technical findings relevant to the YouTube MCP project.
-- Turning supplied research material into reusable knowledge notes.
-- Organising technical knowledge into the Second Brain.
+- Processing an existing note with `status: draft` into the Brain.
+- Updating an existing note with new, verified findings.
+
+Do not use it for requirement changes (edit `docs/srs.md` through a PR), for ADRs
+(`docs/adr/`) or for stage reviews (`docs/stage-reviews/`).
 
 ## 3. Required Inputs
 
-Obtain the following:
-
-- Research material: URL, document, PDF or supplied text.
-- Topic or subject.
-- Project context, if available.
-- Contributor name, if available.
-
-If the source content is unavailable, ask the user to provide it.
-
-Never pretend to have read a source.
+- **Research material:** a URL, document, PDF or supplied text. If the content is not
+  available to you, ask for it. Never pretend to have read a source.
+- **Topic.**
+- **Contributor:** the team role (for example `Person 2`) of the person the note is written
+  for. If the role is unknown, ask; if it cannot be confirmed, use the contributor's Git
+  username. Never invent a contributor.
+- **Project context**, if available.
 
 ## 4. Workflow
 
-### Step 1: Inspect the Source
+### Step 1: Inspect and verify the source
 
-- Read the supplied research material.
-- Identify its title, author or organisation, publication date if available, and source URL.
-- Extract relevant facts, concepts, constraints and technical findings.
-- Identify important technical terminology.
-- Distinguish source-supported facts from your own interpretation.
+- Read the supplied material in full. Record its title, organisation or author, URL, the
+  access date and any "last updated" date the page actually shows.
+- Prefer official and primary sources. Quote numbers, limits and error names exactly.
+- Separate what the source states from your interpretation. If a fact you expected is not in
+  the source, write "not stated in the source" instead of filling the gap.
 - Never invent facts, quotations, dates or references.
-- Prefer official and primary sources.
 
-### Step 2: Identify Project Relevance
+### Step 2: Identify project relevance
 
-Explain how the research relates to the YouTube MCP project.
+Explain how the research relates to the project and list only genuinely relevant
+requirements, using canonical zero-padded IDs in backticks, for example `FR-01`, `NFR-02.2`,
+`SK-05`, `TQ-04`. Requirements are defined in the SRS and are never wikilinked.
 
-Identify relevant requirement IDs where applicable:
+### Step 3: Check for duplicates and existing notes
 
-- FR: Functional Requirements.
-- NFR: Non-Functional Requirements.
-- SK: Skill Requirements.
-- TQ: Testing Requirements.
+- Search `brain/` for notes on the same topic (filenames, titles, `aliases`, headings).
+- If a note already covers the topic, **update or merge** it instead of creating a new one.
+  Keep all existing correct content and add every contributor to `author`.
+- Never overwrite or delete a note without the owner's approval.
 
-Do not force a connection if the research is unrelated.
+### Step 4: Choose a PARA destination
 
-Explain whether the research:
+- `brain/resources/`: reusable technical and research references (default for research).
+- `brain/projects/`: knowledge specific to the active project, including `ai-session` notes.
+- `brain/areas/`: ongoing responsibilities and disciplines.
+- `brain/inbox/`: material awaiting classification.
+- `brain/archive/`: inactive or completed material.
 
-- Helps implement a project feature.
-- Explains an API or technical constraint.
-- Helps with architecture or design.
-- Supports security or testing.
-- Provides general technical background.
+### Step 5: Write the note from the template
 
-### Step 3: Choose a PARA Destination
+Copy [the note template](assets/research-note.tmpl) and fill every `{{placeholder}}`. The
+frontmatter must contain exactly the schema fields:
 
-Choose the appropriate destination:
+```yaml
+title: "YouTube Video Resource"
+type: research            # research | ai-session
+author:
+  - "Person 1"            # role names; list every contributor
+created: "2026-11-07"     # date the note was first created; never guessed
+tags:
+  - research
+sources:                  # http(s) URLs or repository-relative paths that exist
+  - "https://developers.google.com/youtube/v3/docs/videos"
+aliases:                  # optional; display names only
+  - "Video resource"
+status: ingested          # optional: draft | ingested
+```
 
-- `brain/inbox/`: Material awaiting review or classification.
-- `brain/projects/`: Knowledge specific to the active YouTube MCP project.
-- `brain/areas/`: Ongoing responsibilities and disciplines.
-- `brain/resources/`: Reusable technical and research references.
-- `brain/archive/`: Inactive or completed material.
+- Filename: hyphen-separated words, for example `YouTube-Video-Resource.md`; AI-session notes
+  use `ai-session-YYYY-MM-DD-topic.md`.
+- Link existing notes with the filename as the target and the title as display text, for
+  example `[[OAuth-Authentication|OAuth 2.0 Authentication]]`. Do not link planned notes;
+  list them as plain text marked "(planned)".
+- Link repository documents outside the Brain with relative Markdown links, for example
+  `[SRS](../../docs/srs.md)`.
+- When updating a note, keep its original `created` date and existing `author` entries.
 
-Prefer `resources/` for reusable technical research and `projects/` for project-specific implementation knowledge.
+### Step 6: Update the index
 
-### Step 4: Check for Duplicates
+Add the note to `brain/index.md` under the matching section, with a short description, unless
+an entry already exists.
 
-Before creating a note:
+### Step 7: Append to the activity log
 
-- Search for an existing note on the same subject.
-- Check whether the information already exists.
-- If a similar note exists, inform the user and propose updating it.
-- Do not silently overwrite existing research.
-- Preserve useful existing content.
+Append an entry to `brain/log.md` under the actual date of the operation (keep the log in
+chronological order):
 
-### Step 5: Create the Research Note
+```markdown
+### Activity: Research Ingestion — <topic>
 
-Every research note must follow this structure:
+**Sources:** <title> — <URL> (accessed YYYY-MM-DD)
 
-    ---
-    title: "Research Topic"
-    type: research
-    tags:
-      - research
-      - youtube-mcp
-    source: "https://example.com"
-    ---
+**Note created or updated:** [[File-Name|Title]] (`brain/resources/File-Name.md`)
 
-    # Research Topic
+**Contributor:** <role or Git username>; AI-assisted: yes/no
 
-    ## Overview
+**Result:** <what was done, including anything not verified>
+```
 
-    Provide a brief explanation of the subject.
+Never claim that a note, index or log was updated unless the file operation succeeded.
 
-    Explain what the technology, concept or topic is and why it matters.
+### Step 8: Validate
 
-    ## Key Concepts
+Run, from the repository root:
 
-    Explain the important concepts.
+```text
+python scripts/validate_brain.py
+python scripts/validate_docs.py
+```
 
-    Include relevant technical terminology and definitions.
+Fix every reported error in the files you changed. Do not weaken a validator to make a note
+pass. If an error concerns metadata only the contributor can confirm, report it instead of
+guessing.
 
-    ## Important Findings
+### Step 9: Submit through a pull request
 
-    List the verified findings from the source.
+Brain changes, including AI-generated ones, go through a pull request with at least one human
+review (`SB-05`, `AIP-01`). Commit with the contributor's own Git identity so the contribution
+is visible in history (`SB-06`), mention AI assistance in the PR, and link related issues and
+requirement IDs.
 
-    Include:
-    - Important technical details.
-    - Relevant API behaviour.
-    - Limitations and constraints.
-    - Important specifications.
-    - Findings that may influence implementation.
+### Step 10: Report the result
 
-    Do not include unsupported claims.
+Report what was researched, the note created or updated and its path, the requirements and
+notes it links to, whether the index and log were updated, the validation result, and any
+unresolved questions.
 
-    ## Relevance to Our Project
+## 5. Outputs (Expected Outcome)
 
-    Explain how the findings affect our YouTube MCP project.
+1. A verified note in the correct PARA folder that passes `validate_brain.py`.
+2. Correct wikilinks to existing notes and a relative link to the SRS.
+3. An updated `brain/index.md` and a chronological `brain/log.md` entry.
+4. A pull request ready for human review, and a short completion report.
 
-    Mention practical applications and potential implementation implications.
+## 6. Quality Rules
 
-    ## Related Requirements
-
-    Link relevant requirements where applicable.
-
-    Examples:
-    - [[FR-1]]
-    - [[FR-2]]
-    - [[NFR-1]]
-    - [[NFR-2]]
-
-    Only include genuinely relevant requirements.
-
-    ## Sources
-
-    For each source include:
-    - Source title.
-    - Organisation or author.
-    - URL.
-    - Access date.
-
-    ## Related Notes
-
-    Add relevant existing Obsidian wikilinks.
-
-    Only link notes that actually exist or are being created as part of the same approved task.
-
-### Step 6: Save the Note
-
-- Save the note in the selected PARA folder.
-- Use a clear, descriptive filename.
-- Avoid duplicate filenames.
-- Use Markdown formatting.
-- Use valid Obsidian wikilinks.
-- Ensure the note has the required metadata.
-- Do not overwrite existing files without approval.
-
-### Step 7: Update the Index
-
-When a note is an important reusable reference:
-
-- Open `brain/index.md`.
-- Add its wikilink under the appropriate section.
-- Place it under Resources, Projects or Areas as appropriate.
-- Do not add duplicate links.
-- Preserve the existing index structure.
-
-Not every minor note needs to appear in the main index.
-
-### Step 8: Update the Activity Log
-
-Append an entry to `brain/log.md`.
-
-Each entry must contain:
-
-- Actual date of the operation.
-- Research topic.
-- Source used.
-- Note created or updated.
-- Destination path.
-- Contributor, if known.
-- Result and any issues.
-
-Example:
-
-    ## YYYY-MM-DD
-
-    ### Activity: Research Ingestion
-
-    **Topic:** YouTube Data API v3
-
-    **Source:** Official Google documentation
-
-    **Note Created:** [[YouTube Data API]]
-
-    **Destination:** brain/resources/
-
-    **Contributor:** Person 2
-
-    **Result:** Successfully created and linked research note.
-
-Never claim a note was created or updated unless the file operation succeeded.
-
-### Step 9: Report the Result
-
-After ingestion, report:
-
-1. What was researched.
-2. Which note was created or updated.
-3. Where the note was saved.
-4. Which requirements it references.
-5. Which related notes it links to.
-6. Whether index.md was updated.
-7. Whether log.md was updated.
-8. Any unresolved questions or problems.
-
-## 5. Quality Rules
-
-- Never fabricate research findings or sources.
-- Prefer official and primary sources.
-- Write concise, understandable explanations in your own words.
-- Preserve important technical terminology.
+- Never fabricate findings, sources, dates or contributors.
+- Write concise explanations in your own words; keep important terminology.
 - Distinguish facts, interpretations and recommendations.
-- Use valid Obsidian wikilinks.
-- Never silently delete or overwrite notes.
 - Do not include secrets, credentials or personal user data.
-- Include source URLs for factual research.
-- Ensure notes are useful to all three project members.
-- Avoid unnecessary repetition.
-- Maintain consistent formatting across the Second Brain.
+- Avoid repeating content that another note already covers; link to it instead. Exact quota
+  figures live in SRS Appendix A ([ADR 0006](../../../docs/adr/0006-quota-reference-and-accounting.md)).
 
-## 6. Error Handling
+## 7. Error Handling
 
-If a source cannot be accessed:
+- **Source unavailable:** say so, ask for the content or an alternative source, and create no
+  note with invented findings.
+- **Destination folder missing:** report it; the five PARA folders are required by the
+  repository build check.
+- **Note already exists:** update or merge (Step 3); never overwrite silently.
+- **Link target missing:** check whether the note is planned; write it as plain text instead
+  of creating a broken link.
+- **Validation fails:** fix the note, or report the remaining error if only the contributor
+  can resolve it.
+- **Index or log cannot be updated:** report that the ingestion is incomplete.
 
-- Inform the user.
-- Ask for the source content or an alternative source.
-- Do not create a note containing invented findings.
+## 8. Limitations
 
-If the destination folder does not exist:
-
-- Inform the user.
-- Ask for permission before creating missing folders if necessary.
-
-If a note already exists:
-
-- Do not overwrite it.
-- Offer to update or merge the existing note.
-
-If a wikilink points to a missing note:
-
-- Check whether the target note is planned or genuinely missing.
-- Avoid creating misleading links.
-
-If the index or activity log cannot be updated:
-
-- Report the failure.
-- Do not claim the ingestion was completely successful.
-
-## 7. Expected Outcome
-
-A successful run produces:
-
-1. A verified, structured Markdown research note.
-2. A note saved in the correct PARA location.
-3. Relevant Obsidian wikilinks.
-4. An updated index when appropriate.
-5. An updated activity log.
-6. A concise completion report.
-
-The final note must preserve the important knowledge from the original research and explain its relevance to the YouTube MCP project.
+- The skill works only on material that is supplied or that the agent can actually read; it
+  cannot verify paywalled or unavailable sources.
+- It does not decide requirements or architecture; findings become decisions only through the
+  SRS and ADR processes.
+- Summaries are only as good as the source verification step; a human reviewer must check them
+  in the pull request.
+- The skill format has been checked by `scripts/validate_skills.py`, not by the external
+  `skills-ref` tool.

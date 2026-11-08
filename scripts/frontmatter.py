@@ -17,11 +17,7 @@ def load_frontmatter(path: Path) -> tuple[dict[str, object] | None, str | None]:
         return None, "YAML frontmatter is missing or does not start with '---'"
 
     closing_line = next(
-        (
-            index
-            for index in range(1, len(lines))
-            if lines[index].strip() in {"---", "..."}
-        ),
+        (index for index in range(1, len(lines)) if lines[index].strip() in {"---", "..."}),
         None,
     )
     if closing_line is None:
@@ -35,6 +31,10 @@ def load_frontmatter(path: Path) -> tuple[dict[str, object] | None, str | None]:
         line = f" at line {mark.line + 2}" if mark is not None else ""
         problem = getattr(error, "problem", None) or str(error).splitlines()[0]
         return None, f"invalid YAML frontmatter{line}: {problem}"
+    except ValueError as error:
+        # PyYAML's timestamp constructor raises ValueError for impossible dates such as
+        # 2026-13-01 instead of a YAMLError; report it rather than crashing the validator.
+        return None, f"invalid YAML frontmatter: {error}"
 
     if not isinstance(metadata, dict):
         return None, "YAML frontmatter must be a mapping"
