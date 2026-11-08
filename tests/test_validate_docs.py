@@ -9,7 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.markdown_links import github_anchor, heading_anchors, mask_code
+from scripts.markdown_links import github_anchor, heading_anchors, mask_code, wikilinks
 from scripts.validate_docs import validate_docs
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +22,13 @@ class MarkdownHelperTests(unittest.TestCase):
         self.assertEqual(len(masked), len(text))
         self.assertNotIn("[[", masked)
         self.assertEqual(masked.count("\n"), text.count("\n"))
+
+    def test_stray_backtick_does_not_hide_later_paragraphs(self) -> None:
+        # Regression (DEF-010): an unmatched backtick masked text up to the next backtick in a
+        # later paragraph, hiding broken links from validation.
+        text = "A stray ` backtick.\n\nSee [[Broken Link]].\n\nLater a `code` span."
+        self.assertEqual([link for _, link in wikilinks(text)], ["Broken Link"])
+        self.assertEqual(wikilinks("Wrapped `code\nspan [[x]]` text"), [])
 
     def test_github_anchor_rules(self) -> None:
         self.assertEqual(github_anchor("9. Open decisions (OD)"), "9-open-decisions-od")

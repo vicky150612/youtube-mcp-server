@@ -10,7 +10,9 @@ from pathlib import Path
 from urllib.parse import unquote
 
 FENCE = re.compile(r"^[ \t]{0,3}(`{3,}|~{3,})")
-INLINE_CODE = re.compile(r"(`+)(.+?)\1", re.DOTALL)
+# An inline code span may wrap lines but, as in CommonMark, never crosses a blank line; otherwise
+# a stray backtick would hide everything up to the next backtick from validation.
+INLINE_CODE = re.compile(r"(`+)((?:(?!\n[ \t]*\n).)+?)\1", re.DOTALL)
 WIKILINK = re.compile(r"\[\[([^\]\n]+)\]\]")
 # [text](target) or ![alt](target), with an optional "title". Targets with spaces must be
 # written as <target>.
