@@ -70,6 +70,10 @@ class CredentialIgnoreRulesTests(unittest.TestCase):
         wrongly_ignored = sorted(_ignored(FILES_THAT_MUST_STAY_TRACKABLE))
         self.assertEqual(wrongly_ignored, [], f"paths wrongly ignored: {wrongly_ignored}")
 
+    def test_obsidian_workspace_configuration_is_ignored(self) -> None:
+        paths = (".obsidian/workspace.json", "brain/.obsidian/app.json")
+        self.assertEqual(sorted(_ignored(paths)), sorted(paths))
+
     def test_no_tracked_file_matches_an_ignore_rule(self) -> None:
         listing = _git("ls-files", "-z")
         self.assertEqual(listing.returncode, 0, listing.stderr)
