@@ -6,6 +6,8 @@
 
 - Added the six-job GitHub Actions CI pipeline, secret scanning, and local skill/Brain
   validators with deterministic tests.
+- Added credential-file patterns to `.gitignore` and repository-hygiene tests that fail if
+  a credential file is not ignored or is already tracked (I-13).
 - Added proposed ADRs 0001–0008 (skill location, note schema, linking conventions,
   documentation locations, repository tooling, quota model, playlist confirmation, OAuth).
 - Added a documentation validator and CI job (no wikilinks outside the Brain, relative links and

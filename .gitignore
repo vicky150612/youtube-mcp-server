@@ -2,3 +2,19 @@
 __pycache__/
 .ruff_cache/
 *.py[cod]
+
+# Credentials and local secrets (AGENTS.md section 5, SRS NFR-05.1).
+# Ignoring a file does not untrack it; tests/test_repository_hygiene.py checks
+# that no tracked file matches these patterns. The OAuth token-storage location
+# is still open (SRS OD-08); add its exact path here once it is decided.
+.env
+.env.*
+!.env.example
+client_secret*.json
+credentials*.json
+service-account*.json
+token.json
+token*.json
+*.pem
+*.p12
+*.key

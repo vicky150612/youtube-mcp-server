@@ -56,11 +56,24 @@ PR-3's formatting). Run before the line-ending commit `523655e`.
 none exist); product tests (no application code); an independent re-run of the `brain-ingest`
 evaluation by a team member.
 
-## 2026-11-08 — I-13 credential protection
+## 2026-11-08 — I-13 credential protection (originally commit `63acd08` on `fix/gitignore-credential-protection`; integrated into this branch by cherry-pick)
 
-Recorded on branch `fix/gitignore-credential-protection` (local commit `63acd08`), not on this
-branch: 3 hygiene tests passed, both negative probes failed as expected, and both Gitleaks scans
-found no leaks. See that commit's version of this file for the full table.
+Local run on Windows with the project-pinned tools: Python 3.12.7, PyYAML 6.0.3, Ruff 0.17.4,
+Gitleaks 8.30.1 (release checksum verified). Uncommitted branch; not a GitHub Actions run.
+
+| Command/check | Result | Scope |
+|---|---|---|
+| `python -m unittest tests.test_repository_hygiene -v` | Passed; 3 tests | Credential paths ignored; `.env.example` and project files not ignored; no tracked file matches an ignore rule. |
+| Same test module against the previous `.gitignore`, in a throwaway repository | Failed as expected (credential-ignore test) | Confirms the test detects missing credential patterns. |
+| Same test module with a force-added `token.json`, in a throwaway repository | Failed as expected (tracked-file test) | Confirms the test detects a credential file that is already tracked. |
+| `python -m unittest discover -s tests` | Passed; 24 tests | The 21 existing tests and the 3 new tests. |
+| `ruff check scripts tests` | Passed | |
+| `ruff format --check scripts tests` | Failed; 4 files would be reformatted | Pre-existing: `scripts/frontmatter.py`, `scripts/validate_brain.py`, `scripts/validate_skills.py`, `tests/test_ci_validators.py`. Addressed separately under C4. |
+| `python scripts/ci_build.py` | Failed | Pre-existing: `src/` is not tracked. Addressed separately under C4. |
+| `python scripts/validate_skills.py` | Passed, but vacuously | Scans only `skills/`; the real skill is not validated. Tracked as C3. |
+| `python scripts/validate_brain.py` | Failed; 36 errors | Pre-existing: 33 broken wikilinks and 3 notes using `source` instead of `sources`. Tracked as C1 and C2. |
+| `gitleaks dir . --config .gitleaks.toml --redact --no-banner --exit-code 1` | Passed; no leaks | Working tree, including untracked local files. |
+| `gitleaks git . --config .gitleaks.toml --redact --no-banner --exit-code 1` | Passed; no leaks | 11 commits of Git history. |
 
 ## 2026-11-07 — Part 5 and Part 6 documentation (historical)
 
