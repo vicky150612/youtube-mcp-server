@@ -66,8 +66,11 @@ are not part of it:
 │   ├── workflows/ci.yml           # seven CI jobs (section 10)
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── brain/                         # Obsidian vault root (ADR 0003)
+│   ├── inbox/                     # PARA (tracked with .gitkeep)
 │   ├── projects/                  # project and ai-session notes
+│   ├── areas/                     # PARA (tracked with .gitkeep)
 │   ├── resources/                 # research notes
+│   ├── archive/                   # PARA (tracked with .gitkeep)
 │   ├── index.md
 │   └── log.md
 ├── docs/
@@ -82,8 +85,11 @@ are not part of it:
 │   ├── srs.md                     # requirements and the open-decision register (section 9)
 │   └── traceability.md
 ├── scripts/                       # CI build check and validators (Python tooling)
+├── src/                           # reserved for application code; README only (OD-01)
 ├── tests/                         # unit tests for the repository tooling
-├── .gitignore
+│   └── fixtures/                  # synthetic fixtures only; README with the rules
+├── .gitattributes                 # LF line endings (N-5)
+├── .gitignore                     # includes credential and .obsidian/ rules
 ├── .gitleaks.toml
 ├── AGENTS.md
 ├── CHANGELOG.md
@@ -92,11 +98,9 @@ are not part of it:
 └── ruff.toml
 ```
 
-Not yet tracked on this branch: `src/`, `tests/fixtures/` and the empty PARA folders
-`brain/inbox/`, `brain/areas/` and `brain/archive/`. They are added by the separate build and
-structure change (branch `ci/build-structure-formatting`), which the CI build check requires;
-until it is integrated they exist only as local folders. Credential patterns in `.gitignore` are
-added by branch `fix/gitignore-credential-protection`.
+The build and structure changes (originally the `ci/build-structure-formatting` worktree) and
+the credential-protection commit (originally `63acd08` on `fix/gitignore-credential-protection`)
+are integrated on this branch; `scripts/ci_build.py` fails if a required folder is missing.
 
 Do not create duplicate documentation or move files without a reason. Keep modules cohesive and
 place code in the location agreed by the team once the application stack is decided (`OD-01`).

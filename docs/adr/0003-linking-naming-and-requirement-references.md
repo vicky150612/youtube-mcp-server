@@ -85,5 +85,5 @@ outside the Brain. Both run in CI and print the file, line and offending link or
 - Historical log entries that used old link targets are rewritten to the current targets or to
   code-formatted text; the log records that this normalisation happened.
 - Contributors need the relative-link rule when writing in `docs/`; CI enforces it.
-- The `.obsidian/` ignore rule belongs with the credential-protection `.gitignore` change
-  (branch `fix/gitignore-credential-protection`) and is a follow-up there.
+- The `.obsidian/` ignore rule was added to `.gitignore` on 2026-11-08, after the
+  credential-protection change was integrated, with a hygiene test.

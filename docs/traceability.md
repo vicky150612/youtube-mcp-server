@@ -44,8 +44,8 @@ Chain: requirement → GitHub issue → pull request → test → skill → Brai
 | `NFR-04.1` Input validation | None yet | #14 | Specified | [Errors](../brain/resources/YouTube-API-Errors.md) | Specified |
 | `NFR-04.2` Prompt-injection resistance | None yet | #14 | Specified (CONF-13) | [Video](../brain/resources/YouTube-Video-Resource.md) | Specified |
 | `NFR-04.3` Confirmation integrity | None yet | Branch (proposed, ADR 0007) | Specified (CONF-01…15) | [MCP Tools](../brain/resources/MCP-Tools-and-Resources.md) | Proposed |
-| `NFR-05.1` No secrets in repository | None yet | #11 (Gitleaks CI); `fix/gitignore-credential-protection` (local commit `63acd08`, not merged) | Gitleaks CI job; `tests/test_repository_hygiene.py` on that branch | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Partly implemented (repository level) |
-| `NFR-05.2` No real personal data | None yet | #14; branch (`tests/fixtures/README.md` on the PR-3 worktree, not committed) | None | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Specified |
+| `NFR-05.1` No secrets in repository | None yet | #11 (Gitleaks CI); branch (credential `.gitignore` rules, cherry-picked from `63acd08`) | Gitleaks CI job; `tests/test_repository_hygiene.py` | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Partly implemented (repository level) |
+| `NFR-05.2` No real personal data | None yet | #14; branch (`tests/fixtures/README.md` fixture rules) | None (product fixtures do not exist yet) | [CI Pipeline](../brain/projects/CI-Pipeline.md) | Specified |
 | `NFR-06.1` Channel-less accounts | None yet | #14 | Specified | [Errors](../brain/resources/YouTube-API-Errors.md), [Playlist](../brain/resources/YouTube-Playlist-Resource.md) | Specified |
 | `NFR-06.2` Graceful failure | None yet | #14; branch (typed errors in [interfaces](api/interfaces.md)) | Specified | [Errors](../brain/resources/YouTube-API-Errors.md) | Specified |
 | `NFR-07` Provider isolation | None yet | #14 | None | [MCP Architecture](../brain/resources/MCP-Architecture.md) | Specified |
@@ -96,7 +96,7 @@ Chain: requirement → GitHub issue → pull request → test → skill → Brai
 | `SB-03` ADRs and skills cite Brain notes | Branch | `scripts/validate_docs.py` (ADRs), `scripts/validate_skills.py` (skills) | Enforced in CI |
 | `SB-04` `AGENTS.md` at root | #10 | [`AGENTS.md`](../AGENTS.md) | Done |
 | `SB-05` Brain changes through PRs | #12, #15, #17 | Merge history; this branch awaits a PR | Ongoing |
-| `SB-06` Every member authors notes | #12, #15, #17 | Commit authors and note `author` fields; mapping of Git accounts to Persons not recorded | Partly verifiable |
+| `SB-06` Every member authors notes | #12, #15, #17 | Note `author` fields (counted 2026-11-08): Person 1 on 5 notes, Person 2 on 4, Person 3 on 4 (the merged API note credits Persons 1 and 2), plus 2 notes by Git user `ChadDadChag`. Git evidence links identity `Vicky` to Person 3 (`a5caa34`) and the committer of `8e80f55` to Person 2's notes; no complete account-to-Person mapping is recorded | Met by note authorship; account mapping partly verifiable |
 | `AIP-01` Human review of AI changes | — | This branch awaits review | Pending |
 | `AIP-02` Members can explain merged work | — | Not verifiable from the repository | Unverifiable |
 | `AIP-03` AI-session notes | #15; branch | [2026-11-07](../brain/projects/ai-session-2026-11-07-srs-drafting.md), [2026-11-08](../brain/projects/ai-session-2026-11-08-stage-1-audit.md), [CI Pipeline](../brain/projects/CI-Pipeline.md) | Done for known sessions |

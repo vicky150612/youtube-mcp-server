@@ -2,7 +2,7 @@
 title: Stage 1 Review
 type: stage-review
 stage: 1
-status: draft — Person 1 section and audit section filled; reflections from Persons 2 and 3 pending
+status: draft — Person 1 and audit sections filled; Persons 2 and 3 have evidence-based drafts awaiting their own confirmation
 ---
 
 # Stage 1 Review (SB-02)
@@ -39,10 +39,20 @@ Person 1 should confirm both edits.
 MCP tools/resources, Agent Skills format, YouTube Data API) in PR #12, logged as ingestion runs on
 2026-11-07.
 
-**What worked · what did not · outstanding problems · lessons · changes for Stage 2:**
-*to be written by Person 2.* Items Person 2 may want to cover: confirming the `author`/`created`
-metadata of their notes (blocked until then, ADR 0002), the note-schema decision, and the
-Stage 2 skills `brain-refine` and `brain-query` (proposed owner).
+> **DRAFT prepared from repository evidence on 2026-11-08 — not Person 2's own assessment.**
+> Person 2 should edit, replace or delete every point below and then remove this notice.
+
+- **What worked (evidence):** every ingestion run on 2026-11-07 was logged with topic, source,
+  destination and contributor; notes separated source facts from interpretation.
+- **What did not (evidence):** the original `brain-ingest` template wrote a singular `source` field
+  that the CI validator rejected (DEF-002); three notes linked to planned notes, which broke
+  wikilink validation (DEF-003); note metadata (`author`/`created`) was not recorded in the notes.
+- **Outstanding problems:** approve or amend ADR 0002 (schema) and ADR 0003 (links); `brain-refine`
+  and `brain-query` not started (proposed owner).
+- **Changes for Stage 2 (suggested):** run `validate_brain.py` before every Brain PR; record
+  `author`/`created` in each note at creation time.
+
+*Person 2's own reflection:* not yet written.
 
 ## Person 3 — Repository, `AGENTS.md`, CI
 
@@ -53,10 +63,21 @@ repository, `AGENTS.md` and CI to Person 3; the matching work is `.gitignore` an
 documentation (PR #11). Which Git account made these commits is not mapped to a Person in the
 repository; Person 3 should confirm.
 
-**What worked · what did not · outstanding problems · lessons · changes for Stage 2:**
-*to be written by Person 3.* Items Person 3 may want to cover: the CI failures on `main`
-recorded in `docs/testing/results.md` (build, formatting, Brain validation), the GitHub ruleset
-without required checks, and `local-check` (proposed owner).
+> **DRAFT prepared from repository evidence on 2026-11-08 — not Person 3's own assessment.**
+> Person 3 should edit, replace or delete every point below and then remove this notice.
+
+- **What worked (evidence):** CI jobs pinned by commit SHA, Gitleaks checksum verification,
+  validators with tests and failure-propagation probes; research notes clearly separated Google's
+  statements from project recommendations.
+- **What did not (evidence):** on `main` the Build job failed because `src/` was untracked
+  (DEF-006), Ruff formatting failed on four files (DEF-007), and skill validation passed
+  vacuously because it scanned `skills/` (DEF-001); the `main` ruleset requires no status checks.
+- **Outstanding problems:** required status checks on `main` (GitHub admin); `local-check` not
+  started (proposed owner); confirm the CI note's `created` date (2026-11-07 vs 2026-11-06).
+- **Changes for Stage 2 (suggested):** keep CI green on `main` before merging; make the seven
+  checks required.
+
+*Person 3's own reflection:* not yet written.
 
 ## Stage 1 repository audit (AI-assisted session, 2026-11-08)
 
@@ -73,7 +94,7 @@ updates; `brain-ingest` evaluation.
 pages; recording decisions as Proposed ADRs instead of presenting them as approved; writing
 tests first for new validator rules, which exposed a parser crash.
 
-**What did not:** contributor metadata could not be completed without the contributors;
+**What did not:** contributor metadata had to be reconstructed from Git evidence afterwards;
 GitHub-side evidence (issues, reviews, Actions runs, rulesets) was not accessible; the original
 briefs are not in the repository, so brief-level wording cannot be checked.
 
@@ -84,8 +105,8 @@ decisions `OD-01`…`OD-17`.
 cheap automated checks prevent most of the drift found in this audit.
 
 **Changes for Stage 2:** approve or amend ADRs 0001–0008; decide the "Before Stage 2" items in the
-register; freeze the interface contracts; integrate the credential-protection and build/structure
-branches; enable required status checks on `main`.
+register; freeze the interface contracts; review and merge this branch (which now integrates the
+credential-protection and build/structure work); enable required status checks on `main`.
 
 ## Team summary
 

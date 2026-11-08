@@ -338,7 +338,7 @@ Skills follow the Agent Skills format (`SKILL.md` with valid frontmatter and nam
 ### 6.2 Second Brain (SB) **[BRIEF-S]**
 | ID | Requirement |
 |---|---|
-| SB-01 | Link notes with `[[wikilinks]]` and to requirement IDs, issues and PRs. |
+| SB-01 | Link notes with `[[wikilinks]]` and to requirement IDs, issues and PRs. Conventions (ADR 0003): wikilink targets are note filenames, requirement IDs are canonical and written in backticks with one relative link to this SRS, planned notes are not linked; CI validates all three. |
 | SB-02 | Write a short review note at the end of each stage (what worked, what did not, what to change), in `docs/stage-reviews/stage-N-review.md` (ADR 0004). |
 | SB-03 | Every ADR and every skill cites ≥ 1 distilled note. |
 | SB-04 | Keep `AGENTS.md` at the repository root. |
@@ -467,4 +467,4 @@ Verified on 2026-11-08 against <https://developers.google.com/youtube/v3/determi
 |---|---|---|---|
 | 0.1.0 | 2026-11-06 | Person 1 | Initial Stage 1 draft |
 | 0.2.0 | 2026-11-07 | Person 1 | Verified quota against Google docs (separate `search.list` bucket); NFR-02.1/NFR-02.2, OD-05, OD-09, Appendix A updated; data-availability notes for FR-03/FR-04 |
-| 0.3.0 | 2026-11-08 | AI-assisted audit (Git user `ChadDadChag`); not yet reviewed by Person 1 | Stage 1 audit consistency pass: `[EXTERNAL]` tag; search-bucket classification (F-7) and capacity (F-3); quota-estimate limits (F-2); per-user Cloud project marked proposed (F-6); likes-route verification status (F-4); NFR-09 wording (I-10); two-phase confirmation in FR-05 with `AC-05.9`…`AC-05.14` and proposed `NFR-04.3` (C6); proposed `NFR-02.3` and `NFR-08.4` (N-1); primary/secondary cross-references for overlapping requirements; SB-02 location; single open-decision register with `OD-10`…`OD-17` (D-3); approval table; Appendix A as canonical quota reference (D-2) |
+| 0.3.0 | 2026-11-08 | AI-assisted audit (Git user `ChadDadChag`); not yet reviewed by Person 1 | Stage 1 audit consistency pass: `[EXTERNAL]` tag; search-bucket classification (F-7) and capacity (F-3); quota-estimate limits (F-2); per-user Cloud project marked proposed (F-6); likes-route verification status (F-4); NFR-09 wording (I-10); two-phase confirmation in FR-05 with `AC-05.9`…`AC-05.14` and proposed `NFR-04.3` (C6); proposed `NFR-02.3` and `NFR-08.4` (N-1); primary/secondary cross-references for overlapping requirements; SB-02 location; single open-decision register with `OD-10`…`OD-17` (D-3); approval table; Appendix A as canonical quota reference (D-2); `SB-01` linking conventions (N-3) |

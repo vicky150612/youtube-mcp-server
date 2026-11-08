@@ -49,17 +49,16 @@ environment outside the repository.
   before writing anything; it was rerun in the correct order.
 - An earlier test harness (credential-protection branch) failed on Windows because text-mode
   pipes add carriage returns; it now uses NUL-separated input.
-- Some required metadata could not be completed: `author`/`created` for four notes wait for
-  their contributors' confirmation, so Brain validation still fails on those notes.
+- Four notes initially lacked `author`/`created`; in the final pass these were completed from
+  evidence recorded at the time in Git (`brain/log.md`, 2026-11-08 Activity 8), not guessed.
+- The final self-audit found a validator weakness (DEF-010: inline-code masking crossed
+  paragraphs) and fixed it with a regression test.
 
 ## Outcome
 
-Ten commits on `fix/stage-1-audit-consistency` (not pushed), including this correction. On a fresh clone, Ruff, all 63
-unit tests, skill and documentation validation and both Gitleaks scans pass. The build check
-fails until the separate build/structure change is integrated, and Brain validation fails only
-on the eight `author`/`created` fields awaiting contributor confirmation. An integration
-simulation with the credential-protection and build/structure changes passed everything except
-those same eight fields. Results: `docs/testing/results.md`.
+First pass: ten commits. Final completion pass: further commits integrating the build/structure
+work and the credential-protection commit, completing note metadata and fixing DEF-010. Final
+results (all checks, fresh clone) are in `docs/testing/results.md`. Nothing has been pushed.
 
 ## Human review
 
