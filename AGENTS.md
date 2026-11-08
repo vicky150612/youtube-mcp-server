@@ -279,7 +279,7 @@ The validation scripts should:
 - Print actionable errors, including the file and field/link involved.
 - Exit with a non-zero status when validation fails.
 
-Keep validation conventions aligned with the owners of `brain/` and `skills/`. Do not impose a schema that conflicts with the agreed templates.
+Keep validation conventions aligned with the owners of `brain/` and `.claude/skills/`. Do not impose a schema that conflicts with the agreed templates.
 
 ## 11. Second Brain (Obsidian) Rules
 

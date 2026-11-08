@@ -2,9 +2,72 @@
 
 Record only checks that were actually run. Include the date, exact command, result, and any
 scope limitation. A passing validator/tooling suite is not evidence that product requirements
-or live API behavior have been tested.
+or live API behavior have been tested. Newest results first; older sections are kept unchanged
+as historical evidence.
 
-## 2026-11-07 — Part 5 and Part 6 documentation
+## 2026-11-08 — Stage 1 audit branch `fix/stage-1-audit-consistency` (current)
+
+Local runs on Windows with the project-pinned tools in an isolated environment: Python 3.12.7,
+PyYAML 6.0.3, Ruff 0.17.4, Gitleaks 8.30.1 (release checksum verified). These are not GitHub
+Actions runs: nothing has been pushed, so no Actions result exists for this branch.
+
+### A. Fresh clone of the committed branch (HEAD `523655e`)
+
+| Command | Result | Notes |
+|---|---|---|
+| `python scripts/ci_build.py` | **Failed** | `src/` is not tracked on this branch. Fixed by the separate build/structure change (`ci/build-structure-formatting`, DEF-006); see run B. |
+| `ruff check scripts tests` | Passed | |
+| `ruff format --check scripts tests` | Passed | 9 files already formatted |
+| `python -m unittest discover -s tests` | Passed; 63 tests | Includes the 21 original tests (2 inverted by ADR 0001) and new validator, documentation and line-ending tests |
+| `python scripts/validate_skills.py --require brain-ingest` | Passed | 1 skill validated (`brain-ingest`) |
+| `python scripts/validate_brain.py` | **Failed; 8 errors** | Only missing `author`/`created` on `Agent-Skills-Format.md`, `MCP-Architecture.md`, `MCP-Tools-and-Resources.md` (Person 2) and `CI-Pipeline.md` (Person 3). These values must be confirmed by the contributors (ADR 0002); zero broken wikilinks remain. |
+| `python scripts/validate_docs.py` | Passed | 29 Markdown files |
+| `gitleaks dir . --config .gitleaks.toml --redact --no-banner --exit-code 1` | Passed; no leaks | |
+| `gitleaks git . --config .gitleaks.toml --redact --no-banner --exit-code 1` | Passed; no leaks | Full history |
+
+### B. Integration simulation (throwaway clone; no real branch changed)
+
+The audit branch plus the credential-protection commit `63acd08` (cherry-picked; one
+`CHANGELOG.md` conflict resolved by keeping both entries) plus the uncommitted PR-3 worktree
+changes (conflicts in `scripts/validate_brain.py`, `scripts/validate_skills.py` and
+`tests/test_ci_validators.py` resolved by keeping the audit versions, which already contain
+PR-3's formatting). Run before the line-ending commit `523655e`.
+
+| Command | Result | Notes |
+|---|---|---|
+| `python scripts/ci_build.py` | Passed | 10 Python files; all required directories present |
+| `ruff check` / `ruff format --check scripts tests` | Passed | 11 files formatted |
+| `python -m unittest discover -s tests` | Passed; 72 tests | Adds the 3 hygiene tests and 8 build tests |
+| `validate_skills.py --require brain-ingest`, `validate_docs.py` | Passed | 31 Markdown files |
+| `validate_brain.py` | **Failed; 8 errors** | Same pending contributor metadata as run A |
+| Gitleaks working tree and history | Passed; no leaks | |
+
+### C. Other checks
+
+| Check | Result |
+|---|---|
+| `git diff --cached --ignore-cr-at-eol --stat` for the line-ending commit | Only the two new files changed content; 15 files changed line endings only |
+| `python -m unittest tests.test_line_endings` after renormalisation | Passed; no tracked file stored with CRLF |
+| Grep for stale filenames, top-level `skills/` paths and outdated quota statements | Only intentional historical or cautionary mentions remain |
+| Duplicate note titles in `brain/` | None |
+
+**Not run / unable to verify:** GitHub Actions runs, the `main` ruleset and PR review records
+(no authenticated GitHub access); live YouTube API tests (no approved budget or test account;
+none exist); product tests (no application code); an independent re-run of the `brain-ingest`
+evaluation by a team member.
+
+## 2026-11-08 — I-13 credential protection
+
+Recorded on branch `fix/gitignore-credential-protection` (local commit `63acd08`), not on this
+branch: 3 hygiene tests passed, both negative probes failed as expected, and both Gitleaks scans
+found no leaks. See that commit's version of this file for the full table.
+
+## 2026-11-07 — Part 5 and Part 6 documentation (historical)
+
+> **Historical:** this table reflected a local working tree that contained an untracked `src/`
+> directory and fewer Brain notes. The Part 7 run and the main-branch Actions run below found
+> that Build, Lint (format) and Brain validation actually failed on committed `main`. Kept as
+> evidence; superseded by the sections above.
 
 | Command/check                                                                                 | Result                                                         | Scope                                                                                                                |
 | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -31,7 +94,7 @@ At the time of this Part 5/6 run, the workflow had not yet run on the default br
 later Part 7 check below records an actual main-branch run; neither run validates this
 uncommitted documentation branch.
 
-## 2026-11-07 — Part 7 technical-constraint review
+## 2026-11-07 — Part 7 technical-constraint review (historical)
 
 | Command/check | Result | Scope |
 |---|---|---|

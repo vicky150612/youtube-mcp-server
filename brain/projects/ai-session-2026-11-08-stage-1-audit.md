@@ -52,6 +52,15 @@ environment outside the repository.
 - Some required metadata could not be completed: `author`/`created` for four notes wait for
   their contributors' confirmation, so Brain validation still fails on those notes.
 
+## Outcome
+
+Ten commits on `fix/stage-1-audit-consistency` (not pushed). On a fresh clone, Ruff, all 63
+unit tests, skill and documentation validation and both Gitleaks scans pass. The build check
+fails until the separate build/structure change is integrated, and Brain validation fails only
+on the eight `author`/`created` fields awaiting contributor confirmation. An integration
+simulation with the credential-protection and build/structure changes passed everything except
+those same eight fields. Results: `docs/testing/results.md`.
+
 ## Human review
 
 All changes must be reviewed in a pull request before merging (`AIP-01`, `SB-05`). Reviewer:
