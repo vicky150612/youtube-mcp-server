@@ -3,9 +3,12 @@
 - **Status:** Proposed | Accepted | Superseded | Rejected
 - **Date:** YYYY-MM-DD
 - **Decision owners:** Pending
+- **Approval record:** Who approved it, when and where (PR review link). Write "Pending" until
+  the approval actually exists.
 - **Related requirements:** Pending
-- **Relevant Brain notes:** Add at least one verified existing note, for example
-  `[[Existing note title]]`; do not leave a placeholder in an accepted ADR.
+- **Relevant Brain notes:** At least one existing, distilled note as a relative Markdown link,
+  for example [Agent Skills Format](../../brain/resources/Agent-Skills-Format.md). Files under
+  `docs/` use relative Markdown links, not Obsidian wikilinks (see ADR 0003).
 
 ## Context
 
