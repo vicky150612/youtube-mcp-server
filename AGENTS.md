@@ -149,7 +149,7 @@ The `video-to-playlist` skill requires a video summary. The project statement do
 All contributors must preserve the following constraints:
 
 - **API compliance:** Official YouTube Data API v3 only.
-- **Quota:** Respect the default daily quota stated in the project specification (10,000 units for a new project). Do not create extra Google Cloud projects to obtain more quota.
+- **Quota:** Respect the default daily quota stated in the project specification (10,000 units for a new project; the separate `search.list` and `videos.insert` buckets and all per-method costs are recorded only in SRS Appendix A). Do not create extra Google Cloud projects to obtain more quota.
 - **Quota accounting:** Estimate and track the documented cost of each API operation in every applicable quota bucket; costs are not uniform. Count additional list pages and playlist writes. Reject a workflow that would exceed any remaining budget **before making any API call** (SRS `NFR-02.2`); fail closed if a required cost is unknown (proposed `NFR-02.3`). The remaining budget is a local estimate, never Google's figure. The canonical figures are SRS Appendix A; verify project-specific limits before implementation ([ADR 0006](docs/adr/0006-quota-reference-and-accounting.md)).
 - **Caching:** Use caching and recorded fixtures where appropriate to reduce unnecessary API calls.
 - **OAuth:** Request minimum necessary scopes and store credentials/tokens safely. The proposed design (desktop client with PKCE and loopback redirect, `youtube.readonly` plus incremental `youtube`, OS credential store) is [ADR 0008](docs/adr/0008-oauth-client-and-scopes.md).

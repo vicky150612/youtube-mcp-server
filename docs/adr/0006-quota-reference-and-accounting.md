@@ -27,9 +27,9 @@ Verified on 2026-11-08 against Google's pages
 <https://developers.google.com/youtube/v3/getting-started>,
 <https://developers.google.com/youtube/v3/revision_history>):
 
-- Default allocation: 100 `search.list` calls, 100 `videos.insert` calls, and 10,000 units per
-  day combined for all other endpoints; each `search.list` or `videos.insert` call costs 1 in
-  its own bucket.
+- The default allocation is a general daily unit pool plus separate daily call buckets for
+  `search.list` and `videos.insert`; the verified figures are recorded once, in
+  [SRS Appendix A](../srs.md#appendix-a--reference-youtube-api-quota) (Decision 1).
 - The revision history entry dated **June 1, 2026** states that `videos.insert` and
   `search.list` "will be charged to their own respective quota buckets".
 - Every request, including invalid ones, costs at least one point; each additional page is
@@ -61,7 +61,7 @@ Verified on 2026-11-08 against Google's pages
    per-run caps for every applicable bucket; a missing cap fails closed and a zero cap disables
    calls. Both are tagged `[PROPOSED]` in the SRS until the team approves them; `AGENTS.md` and
    the testing README cite these IDs instead of stating independent rules.
-5. **Search capacity (F-3).** With 100 `search.list` calls per project per day and the `OD-09`
+5. **Search capacity (F-3).** With the daily `search.list` limit in SRS Appendix A and the `OD-09`
    proposal of at most 2 search calls per tool invocation, the project can serve **at most 50
    search-dependent tool invocations per day**, shared by every user, process and live test of
    the same Cloud project, and fewer if any invocation uses more searches or pages. The SRS
