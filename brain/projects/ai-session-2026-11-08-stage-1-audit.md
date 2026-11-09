@@ -2,7 +2,7 @@
 title: AI session — Stage 1 repository audit
 type: ai-session
 author:
-  - ChadDadChag
+  - Person 2
 created: 2026-11-08
 tags:
   - ai-session
@@ -24,8 +24,7 @@ N-1–N-5, D-1–D-3, F-1–F-7 and the missing deliverables) on branch
 
 ## Tool
 
-Claude Code (model Claude Opus 5.5), run by Git user `ChadDadChag`, whose team role is not
-recorded in the repository. No secrets, tokens or credentials were shared (`AIP-04`). The
+Claude Code (model Claude Opus 5.5), run by Git user `ChadDadChag` (Person 2; role confirmed by the contributor on 2026-11-09). No secrets, tokens or credentials were shared (`AIP-04`). The
 pinned CI tools (PyYAML 6.0.3, Ruff 0.17.4, Gitleaks 8.30.1) were installed in an isolated
 environment outside the repository.
 

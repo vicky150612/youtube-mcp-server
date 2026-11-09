@@ -60,7 +60,7 @@ Research authorship and implementation ownership are different and both are cred
 | TF-IDF and cosine similarity | Person 3 | Person 1 (video similarity), Person 2 (channel similarity) |
 | MCP architecture, tools and resources | Person 2 | Person 3 (MCP server) |
 | Agent Skills format | Person 2 | Skill owners |
-| YouTube Data API errors | `ChadDadChag` (role unconfirmed) | Person 1 (error mapping) |
+| YouTube Data API errors | Person 2 | Person 1 (error mapping) |
 
 Person 3's research on OAuth and quota does not move those modules away from Person 1; Person 3
 reviews the authentication and quota pull requests as the subject-matter researcher.

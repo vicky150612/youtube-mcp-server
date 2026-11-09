@@ -22,7 +22,7 @@ workflow. Research authorship is distinct from implementation ownership; see
 There are **11 distinct research topics** in `brain/resources/`: YouTube Data API overview,
 video, channel and playlist resources, quota management, API errors, OAuth, TF-IDF/cosine
 similarity, MCP architecture, MCP tools/resources and Agent Skills format. The errors note was
-added on 2026-11-08 as `brain-ingest` evaluation case E1 by Git user `ChadDadChag`. Merging the
+added on 2026-11-08 as `brain-ingest` evaluation case E1 by Person 2 (Git user `ChadDadChag`). Merging the
 two overview notes removed a duplicate, not a topic. The AI-session and CI notes in
 `brain/projects/` are not counted as research notes.
 

@@ -2,7 +2,7 @@
 title: YouTube Data API Errors
 type: research
 author:
-  - ChadDadChag
+  - Person 2
 created: 2026-11-08
 tags:
   - research

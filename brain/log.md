@@ -326,3 +326,19 @@ to reuse the existing note.
   correct `created` to that date.
 
 **Result:** Brain validation passes with no errors.
+
+---
+
+## 2026-11-09
+
+### Activity 1: Contributor role confirmed
+
+**Notes updated:** [[YouTube-API-Errors|YouTube Data API Errors]] and
+[[ai-session-2026-11-08-stage-1-audit|AI session — Stage 1 repository audit]].
+
+**Contributor:** Person 2 (Git user `ChadDadChag`), who confirmed their team role on 2026-11-09.
+
+**Result:** `author` changed from the Git username `ChadDadChag` to `Person 2` on both notes, as
+ADR 0002 prescribes once a role is confirmed. Content, sources and `created` dates are unchanged.
+Earlier entries that name `ChadDadChag` are kept as they were written.
+

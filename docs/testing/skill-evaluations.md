@@ -48,9 +48,9 @@ correct wikilinks, duplicate detection, index update, log update.
 
 **Failures and gaps found**
 
-- **Contributor role unknown:** for E1 the operator's team role is not recorded, so `author`
-  uses the Git username `ChadDadChag`, as ADR 0002 allows. Replace it with the role once
-  confirmed.
+- **Contributor role unknown (resolved 2026-11-09):** at evaluation time the operator's team role
+  was not recorded, so `author` used the Git username `ChadDadChag`, as ADR 0002 allows. The
+  contributor confirmed on 2026-11-09 that they are Person 2, and `author` now reads `Person 2`.
 - **Step 9 (pull request) not yet completed:** the changes are committed on a branch; no PR has
   been opened, so `SB-05` review is outstanding for all three cases.
 - **Earlier version failure (historical):** the skill as merged on 2026-11-07 wrote a singular
