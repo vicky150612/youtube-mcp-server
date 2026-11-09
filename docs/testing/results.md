@@ -5,6 +5,38 @@ scope limitation. A passing validator/tooling suite is not evidence that product
 or live API behavior have been tested. Newest results first; older sections are kept unchanged
 as historical evidence.
 
+## 2026-11-09 — GitHub Actions run for PR #18 (first CI run on GitHub)
+
+**Source:** GitHub Actions, workflow `CI` (`.github/workflows/ci.yml`), triggered by the
+`pull_request` event for [PR #18](https://github.com/vicky150612/youtube-mcp-server/pull/18).
+This is a GitHub-hosted run (Ubuntu 24.04 runners), separate from the local Windows runs recorded
+below.
+
+- **Commit:** `4dd7b38` (`4dd7b388ab0b6e073e54f54afc15d0e7ed5050de`)
+- **Run:** [42563002228](https://github.com/vicky150612/youtube-mcp-server/actions/runs/42563002228),
+  created 2026-11-09 04:39 UTC
+- **Conclusion:** success — all seven checks passed
+
+| Check (job name) | Result | Duration |
+|---|---|---|
+| Build | Passed | 6 s |
+| Lint | Passed | 8 s |
+| Automated tests | Passed | 10 s |
+| Secret scanning | Passed | 6 s |
+| Skill validation | Passed | 10 s |
+| Brain validation | Passed | 7 s |
+| Documentation validation | Passed | 7 s |
+
+**Local validation of the same commit (for comparison):** a fresh local clone of `4dd7b38`
+passed the same nine local commands listed in the next section (build, Ruff lint and format,
+unit tests, skill, Brain and documentation validators, Gitleaks working-tree and history scans),
+and `git ls-files --eol` showed no CRLF files.
+
+**Scope:** these checks validate repository tooling, the Second Brain and documentation. No live
+YouTube API tests were run (none exist; no approved budget or test account), and no product tests
+exist (no application code, `OD-01`). The seven checks are not yet *required* by the `main`
+ruleset (`docs/development/github-workflow.md`), and the PR has not yet been reviewed or merged.
+
 ## 2026-11-08 — Final Stage 1 completion pass (current)
 
 Fresh clone of `fix/stage-1-audit-consistency` at `75a21e5`, after integrating the PR-3 build and
