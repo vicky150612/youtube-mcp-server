@@ -92,7 +92,7 @@ Chain: requirement → GitHub issue → pull request → test → skill → Brai
 | `SE-06` Provider isolation (see `NFR-07`) | #14 | [Interfaces draft](api/interfaces.md) | Specified |
 | `SE-07` User and API docs (see `NFR-11`) | Branch | [API docs](api/README.md) | Partly done |
 | `SB-01` Wikilinks and requirement links | Branch | `scripts/validate_brain.py`; ADR 0003 | Enforced in CI |
-| `SB-02` Stage review notes | #14 (commit `a1dae74`); branch | [Stage 1 review](stage-reviews/stage-1-review.md) | Incomplete (Persons 2 and 3 sections pending) |
+| `SB-02` Stage review notes | #14 (commit `a1dae74`); branch | [Stage 1 review](stage-reviews/stage-1-review.md) | Member sections complete; team summary pending |
 | `SB-03` ADRs and skills cite Brain notes | Branch | `scripts/validate_docs.py` (ADRs), `scripts/validate_skills.py` (skills) | Enforced in CI |
 | `SB-04` `AGENTS.md` at root | #10 | [`AGENTS.md`](../AGENTS.md) | Done |
 | `SB-05` Brain changes through PRs | #12, #15, #17 | Merge history; this branch awaits a PR | Ongoing |

@@ -2,7 +2,7 @@
 title: Stage 1 Review
 type: stage-review
 stage: 1
-status: draft — Person 1, Person 2 and audit sections filled; Person 3 section is an evidence-based draft awaiting Person 3
+status: member sections complete (Person 3's generated from the repository record with Person 3's confirmation); team summary pending
 ---
 
 # Stage 1 Review (SB-02)
@@ -97,48 +97,80 @@ during the audit; their authorship is unchanged.
 
 ## Person 3 — Repository, `AGENTS.md`, CI
 
-> **Draft prepared from repository evidence on 2026-11-09 — not yet reviewed or confirmed by
-> Person 3.** Person 2 identified Person 3 as the Git identity "Vicky"; commit `a5caa34` by that
-> identity is also titled "(Person 3)". Person 3 should check every statement, answer the
-> questions below and then remove this notice.
+*Person 3 (Git identity "Vicky") confirmed, as relayed by Person 2 on 2026-11-09, that this
+reflection may be generated from the work recorded in the repository. The attribution rests on
+commit `a5caa34` by that identity, titled "(Person 3)" and adding notes with `author: Person 3`,
+and on Person 2's identification. The points below are conclusions drawn from the documented
+work; they are not quotations of Person 3's personal opinions.*
 
 **Work completed**
 
-*Assigned and completed (evidence: commits by the Git identity "Vicky"):*
+*Individual work (commits by the Git identity "Vicky", merged to `main`):*
 - Project skeleton (`edaa883`, 2026-11-03) and `.gitignore` and PR template (`eba1a23`,
   2026-11-03; PR #9).
 - `AGENTS.md` (`0f2421e`, 2026-11-06; PR #10).
-- Six-job CI pipeline, the CI build check, skill and Brain validators, 21 tests, Gitleaks
-  configuration and workflow, testing and traceability documentation, and the CI Pipeline
-  AI-session note (`cedd5a0`, 2026-11-07; PR #11).
+- Six-job CI pipeline (build, lint and formatting, tests, Gitleaks, skill and Brain validation),
+  the CI build check, the skill and Brain validators with 21 tests, Gitleaks configuration, and
+  the workflow, testing, defect-log and traceability documentation, with the CI Pipeline note
+  (`cedd5a0`, 2026-11-07; PR #11).
 - Three research notes — OAuth 2.0 authentication, YouTube API quota management, TF-IDF and cosine
-  similarity — with `author: Person 3`, plus updates to `AGENTS.md` (per-bucket quota and live-test
-  rules), the architecture overview, research allocation, testing documentation, results and
-  traceability (`a5caa34`, 2026-11-07; PR #17).
+  similarity — and documentation updates to `AGENTS.md` (per-bucket quota and live-test rules), the
+  architecture overview, research allocation, testing documentation, results and traceability
+  (`a5caa34`, 2026-11-07; PR #17).
+- Recorded the failing CI checks on `main` in `docs/testing/results.md` (2026-11-07) instead of
+  reporting them as passing.
 
-*Assigned, not yet started:* `local-check` (Stage 2; proposed owner, unconfirmed).
+*Assigned, not yet started:* `local-check` (Stage 2; proposed owner, not yet accepted).
 
-*Recorded by Person 3 (`docs/testing/results.md`, 2026-11-07):* on `main`, the Build, Lint (format)
-and Brain validation jobs failed; the causes were later logged as DEF-006, DEF-007, DEF-002 and DEF-003.
-These were fixed during the Stage 1 audit, not in Person 3's commits.
+*Team work:* the CI failures and convention gaps listed below were fixed during the Stage 1 audit
+(AI-assisted session run by Person 2), not in Person 3's commits; the audit built on Person 3's
+pipeline and validators rather than replacing them.
 
-**What worked** — *to be written by Person 3.*
-> *Question for Person 3:* what went well in your Stage 1 work (repository setup, AGENTS.md, CI, research notes)?
+**What worked** *(conclusions from the record)*
+- The CI pipeline was set up securely: actions pinned by commit SHA, read-only permissions, the
+  Gitleaks release checksum verified, and redacted scans of the full history.
+- The validators came with deterministic tests, including probes that confirm a failing test or
+  lint error makes CI fail.
+- The research notes separate what Google documents from project recommendations, and the
+  per-bucket quota and fail-closed live-test rules were later adopted as proposed SRS requirements
+  (`NFR-02.3`, `NFR-08.4`).
+- Failures were reported honestly in the results log, which made them easy to find and fix.
 
-**What did not (what failed)** — *to be written by Person 3.*
-> *Question for Person 3:* what was difficult or did not work? Related evidence: DEF-001, DEF-006, DEF-007 and the main ruleset without required status checks.
+**What did not (what failed)** *(from the Stage 1 audit record)*
+- The Build job failed on every checkout because `scripts/ci_build.py` required an untracked
+  `src/` directory (DEF-006).
+- Ruff formatting failed on four files formatted at a narrower width than `ruff.toml` (DEF-007).
+- Skill validation scanned `skills/` while the skill lived in `.claude/skills/`, so it passed
+  without checking anything (DEF-001).
+- The Brain validator required `sources`, while the `brain-ingest` template wrote `source`, so
+  Brain validation failed on `main` (DEF-002).
+- Changes were merged while these checks were failing, because the `main` ruleset requires no
+  status checks.
+- Some documentation conventions caused later rework: wikilinks in `docs/` that GitHub does not
+  render (I-6), a "Metadata retrieval" module not shown in the architecture diagram (N-2), and
+  quota and live-test rules added to `AGENTS.md` without a matching SRS requirement (N-1).
 
-**Outstanding problems** *(repository record)*
+**Outstanding problems**
 - Required status checks on `main` are not configured (needs a GitHub admin).
+- ADR 0005 (repository tooling) is proposed and awaits team review.
 - `local-check` is not started.
-- The CI note's `created` date is recorded as 2026-11-07 (first commit); the log dates the CI work
-  to 2026-11-06. *Question for Person 3: which is correct?*
+- The CI Pipeline note's `created` date is recorded as 2026-11-07 (first commit), while the log
+  dates the CI work to 2026-11-06; it was left as recorded.
 
-**Lessons learned** — *to be written by Person 3.*
-> *Question for Person 3:* what would you do differently?
+**Lessons learned** *(conclusions drawn from the documented work)*
+- CI is only useful if it is green on `main` and enforced; a failing check that does not block a
+  merge lets defects accumulate.
+- Validators must fail when they find nothing to validate, and their paths and schemas must be
+  agreed with the owners of the files they check.
+- Rules that act as requirements belong in the SRS first, with `AGENTS.md` pointing to them.
 
-**Changes for Stage 2** — *to be written by Person 3.*
-> *Question for Person 3:* which changes do you propose? Do you accept the proposed local-check ownership?
+**Changes for Stage 2**
+- Make the seven CI checks required on `main` and keep them green before merging.
+- Agree validator paths, schemas and documentation conventions with the other owners before
+  parallel work starts.
+- Decide on the proposed `local-check` ownership and implement it.
+- Create the live-test workflow only once its budget is decided (`OD-13`) and there is a real
+  test to run.
 
 ## Stage 1 repository audit (AI-assisted session, 2026-11-08)
 

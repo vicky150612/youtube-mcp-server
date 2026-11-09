@@ -311,7 +311,7 @@ Rules:
 - Use the agreed research-note template and include source references.
 - Run `brain-ingest` when adding new research material or summaries.
 - Changes to the Brain, including AI-generated changes, must go through PRs.
-- At the end of every stage, write a short review note stating what worked, what did not and what should change, in `docs/stage-reviews/stage-N-review.md` (ADR 0004). Each member writes their own reflections.
+- At the end of every stage, write a short review note stating what worked, what did not and what should change, in `docs/stage-reviews/stage-N-review.md` (ADR 0004). Each member writes their own reflections, or explicitly agrees to one generated from the repository record and labelled as such.
 - Every ADR and every Agent Skill must cite at least one distilled Second Brain note.
 
 Do not invent research findings or citations. Verify summaries against their source material.
