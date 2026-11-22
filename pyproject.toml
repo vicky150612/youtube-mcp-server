@@ -1,0 +1,8 @@
+[project]
+name = "youtube-mcp-server"
+version = "0.1.0"
+description = "MCP server for YouTube discovery, recommendations, engagement analysis, and playlist creation"
+requires-python = ">=3.12,<3.13"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
