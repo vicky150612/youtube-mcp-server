@@ -30,7 +30,7 @@ The SRS and workflow PDFs are available locally but are excluded from Git by
 | --- | --- | --- |
 | SRS with FR, NFR, and SK requirements | Available locally | `YT-MCP-SRS.pdf` v1.0 is the approved baseline; the source PDF is gitignored. |
 | PARA Brain vault, index, and log | Complete | See [[brain/index]] and [[brain/log]]. |
-| At least 10 research notes added using `brain-ingest` | Not complete | The required research-note set and `brain-ingest` skill run are not present yet. |
+| At least 10 research notes added using `brain-ingest` | In progress: 4 notes | Four useful notes and a skill-run log entry are recorded; add further notes only when they have implementation or design value. |
 | Root `AGENTS.md` | In progress | The guide reflects the SRS; development commands await confirmation from Jithamanyu. |
 | Repository and CI skeleton | Partial | Repository folders exist; `.github/workflows/` currently has no workflow definition. |
 
@@ -41,6 +41,8 @@ The SRS and workflow PDFs are available locally but are excluded from Git by
 - The architecture/interface plan is still marked as a draft for team agreement.
 - Common data models were delivered in [PR #21](https://github.com/vicky150612/youtube-mcp-server/pull/21);
   the workflow brief places architecture/design documentation in Stage 2.
+- The `brain-ingest` run and its four research notes are recorded in
+  [[brain/log]] and linked from [[brain/index]].
 
 ## Source and relevance
 
