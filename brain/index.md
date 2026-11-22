@@ -27,8 +27,10 @@ archive.
 ## Active work
 
 - Complete the setup and architecture/interface agreement as a team.
-- Confirm formal Stage 1 acceptance criteria against the SRS PDF; it is not
-  currently present in the repository.
+- Complete the Stage 1 research-note requirement: at least 10 sourced notes
+  created using the `brain-ingest` skill.
+- Finish the root `AGENTS.md` and repository/CI skeleton requirements; see
+  [[brain/projects/youtube-mcp/stage-1|Stage 1 progress]].
 
 ## Source and relevance
 
