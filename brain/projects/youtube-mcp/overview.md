@@ -1,7 +1,7 @@
 ---
 title: YouTube MCP project overview
 created: 2026-11-22
-source: "[[docs/architecture/Architecture_and_Interface_Plan]] (draft; cites SRS v1.0)"
+source: "YT-MCP-SRS.pdf v1.0; [[docs/architecture/Architecture_and_Interface_Plan]]"
 requirements:
   - FR-01
   - FR-02
@@ -39,15 +39,17 @@ for the draft shared contracts.
 
 ## Status
 
-The repository setup is complete. The architecture/interface plan is available
-as a draft for team agreement. The SRS PDF is referenced by the architecture
-plan but is not present in the repository, so this overview should be checked
-against the source SRS when it is available.
+The SRS v1.0 and supporting product/workflow briefs are available locally and
+have been reviewed. The PDFs are excluded from Git by `.gitignore`; use the
+team-approved copies when checking this overview. The architecture/interface
+plan is available as a draft for team agreement.
 
 ## Sources and project references
 
-- Source: [[docs/architecture/Architecture_and_Interface_Plan]] (which cites
-  SRS v1.0).
+- Source: `YT-MCP-SRS.pdf` v1.0 and
+  [[docs/architecture/Architecture_and_Interface_Plan]].
+- Supporting project/process sources: `Project_1_YouTube_MCP.pdf` and
+  `SDLC_and_Workflow.pdf`.
 - Related pull requests: [#20](https://github.com/vicky150612/youtube-mcp-server/pull/20)
   (architecture/interface plan) and [#21](https://github.com/vicky150612/youtube-mcp-server/pull/21)
   (common data models).

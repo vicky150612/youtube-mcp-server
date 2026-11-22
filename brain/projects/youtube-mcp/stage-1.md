@@ -1,28 +1,38 @@
 ---
 title: Stage 1 deliverables and progress
 created: 2026-11-22
-source: Repository history and [[docs/architecture/Architecture_and_Interface_Plan]]; formal SRS stage definition pending
-requirements: []
+source: "YT-MCP-SRS.pdf v1.0; SDLC_and_Workflow.pdf; repository status"
+requirements:
+  - SB-01
+  - SB-02
+  - SB-04
+  - SB-05
+  - SK-01
+  - SE-05
 issues: []
 ---
 
 # Stage 1 deliverables and progress
 
-## Scope note
+## Stage 1 acceptance criteria
 
-The repository does not currently contain `YT-MCP-SRS.pdf`, and the available
-architecture plan does not define a Stage 1 checklist. Until the SRS is added,
-this page tracks the setup and architecture baseline evidenced by the team's
-workflow rather than claiming formal SRS acceptance.
+The approved Stage 1 deliverables in `SDLC_and_Workflow.pdf` are: the SRS
+(FR, NFR, and SK requirements), a PARA Brain vault with `index.md` and
+`log.md`, at least 10 research notes added using `brain-ingest`, root
+`AGENTS.md`, and a repository/CI skeleton.
+
+The SRS and workflow PDFs are available locally but are excluded from Git by
+`.gitignore`. Their content was checked for this status update.
 
 ## Deliverables
 
 | Deliverable | Status | Evidence / next action |
 | --- | --- | --- |
-| Shared repository and initial Python 3.12 project structure | Complete | Repository setup is on `main`. |
-| Second Brain PARA folders and starter notes | In progress | This branch adds the requested folders and notes; merge through a reviewed PR. |
-| Architecture and interface agreement | Draft available; team approval pending | See [[docs/architecture/Architecture_and_Interface_Plan]] and [PR #20](https://github.com/vicky150612/youtube-mcp-server/pull/20). |
-| Confirm formal Stage 1 requirements | Blocked on source document | Add `YT-MCP-SRS.pdf` or record its formal Stage 1 acceptance criteria here. |
+| SRS with FR, NFR, and SK requirements | Available locally | `YT-MCP-SRS.pdf` v1.0 is the approved baseline; the source PDF is gitignored. |
+| PARA Brain vault, index, and log | Complete | See [[brain/index]] and [[brain/log]]. |
+| At least 10 research notes added using `brain-ingest` | Not complete | The required research-note set and `brain-ingest` skill run are not present yet. |
+| Root `AGENTS.md` | In progress | The guide reflects the SRS; development commands await confirmation from Jithamanyu. |
+| Repository and CI skeleton | Partial | Repository folders exist; `.github/workflows/` currently has no workflow definition. |
 
 ## Progress
 
@@ -30,11 +40,9 @@ workflow rather than claiming formal SRS acceptance.
   [[brain/projects/youtube-mcp/overview]].
 - The architecture/interface plan is still marked as a draft for team agreement.
 - Common data models were delivered in [PR #21](https://github.com/vicky150612/youtube-mcp-server/pull/21);
-  confirm whether they belong to Stage 1 when the SRS stage criteria are
-  available.
+  the workflow brief places architecture/design documentation in Stage 2.
 
 ## Source and relevance
 
-This tracker connects repository setup to the pending architecture agreement
-and records what remains to be verified against the SRS. No related issue
-number is recorded yet. See [[brain/index|the Second Brain index]].
+This tracker reports progress against the formal Stage 1 checklist. No related
+issue number is recorded yet. See [[brain/index|the Second Brain index]].

@@ -26,3 +26,8 @@ service_account*.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Documents
+Project_1_YouTube_MCP.pdf
+SDLC_and_Workflow.pdf
+YT-MCP-SRS.pdf
