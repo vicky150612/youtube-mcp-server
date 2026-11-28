@@ -1,0 +1,36 @@
+{
+  "videos": [
+    {
+      "video_id": "Fixture0001",
+      "title": "Synthetic database lecture",
+      "channel_id": "UC0000000000000000000001",
+      "duration_s": 180
+    },
+    {
+      "video_id": "Fixture0002",
+      "title": "Synthetic database tutorial",
+      "channel_id": "UC0000000000000000000001",
+      "duration_s": 240
+    }
+  ],
+  "channels": [
+    {
+      "channel_id": "UC0000000000000000000001",
+      "title": "Synthetic classroom",
+      "handle": "@fixtureclass"
+    }
+  ],
+  "categories": {
+    "US": {
+      "27": "Education"
+    }
+  },
+  "library": {
+    "liked": [
+      {
+        "video_id": "Fixture0001",
+        "added_at": "2026-01-02T10:00:00Z"
+      }
+    ]
+  }
+}

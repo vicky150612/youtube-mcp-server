@@ -62,12 +62,9 @@ documents this bootstrap command:
 python -m venv .venv
 ```
 
-The canonical commands for environment activation, dependency installation,
-tests, linting/formatting, type checking, and starting the server have not yet
-been finalized with Jithamanyu. **Treat those commands as TBD** until he
-confirms them; update this section and the README after agreement. Do not infer
-or present package-install, test, or run commands as project standards before
-then.
+Install the project and dev tools with `python -m pip install -e ".[dev]"`.
+Run `python -m pytest -q`, `ruff check .`, and `python scripts/local_check.py`.
+See the README for activation and fixture-mode startup.
 
 ## Branching, commits, and pull requests
 
@@ -100,7 +97,7 @@ line. Contributors must be able to explain their changes.
 - Test that over-budget or unknown-cost workflows make no provider calls.
 - Add a regression test for every significant defect.
 - Record dated Agent Skill evaluation results for each skill at every stage.
-- Exact test and quality-tool commands are TBD; see the coordination note above.
+- Use the commands in the Python environment section above.
 
 Never put real user data in fixtures or logs.
 

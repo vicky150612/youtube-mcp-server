@@ -22,6 +22,11 @@ relevant requirement, issue, or pull request references.
   - [[brain/projects/youtube-mcp/engagement-analysis-data]]
   Related issues: #8, #12, #13, #14, #15. Related PRs: #20, #21, #24.
 
+- **2026-11-28 - brain-ingest (SK-01):** Summarised official Google sources on
+  the API endpoints, quota, Desktop consent, Testing-mode expiry, and
+  caching. Added five notes listed in [[brain/index#YouTube provider research]].
+  Related issues: #3 and #16 through #19. Review PR pending.
+
 ## Source and relevance
 
 This log is the project record for Brain skill runs, as requested in Step 2.
