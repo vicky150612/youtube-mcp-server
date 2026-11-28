@@ -28,10 +28,19 @@ archive.
 - [[brain/resources/agent-skills/agent-skills-format|Agent Skills format]]
 - [[brain/log|Brain skill-run log]]
 
+## YouTube provider research
+
+- [[brain/resources/youtube-api/api-methods|YouTube API methods and batching]]
+- [[brain/resources/youtube-api/quota-buckets|YouTube quota buckets and reset]]
+- [[brain/resources/youtube-api/desktop-oauth|Desktop OAuth and PKCE]]
+- [[brain/resources/youtube-api/oauth-testing-expiry|OAuth Testing-mode expiry]]
+- [[brain/resources/youtube-api/api-retention|API caching and retention]]
+- [[brain/projects/youtube-mcp/provider-ai-session|Provider AI session]]
+
 ## Active work
 
 - Complete the setup and architecture/interface agreement as a team.
-- Continue Stage 1 research: four useful notes are recorded; add more only
+- Continue Stage 1 research: nine research notes are recorded; add more only
   when they support implementation or design, toward the ten-note minimum.
 - Finish the root `AGENTS.md` and repository/CI skeleton requirements; see
   [[brain/projects/youtube-mcp/stage-1|Stage 1 progress]].
